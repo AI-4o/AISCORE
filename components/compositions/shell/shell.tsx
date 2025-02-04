@@ -31,7 +31,7 @@ export function Shell({
             </div>
             <div className="main-wrapper flex">
                 {leftSideChild}
-                <div className="main-content min-h-screen">
+                <div className="main-content flex justify-center items-start min-h-screen">
                     {mainChild}
                 </div>
                 {rightSideChild}

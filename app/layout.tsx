@@ -29,7 +29,7 @@ export default function RootLayout({
       src={config.banner}
       alt={config.appName + " banner"}
       width={1200}
-      height={900}
+      height={700}
     />
   );
   const footer = <Footer />;

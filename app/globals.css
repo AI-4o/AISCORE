@@ -79,7 +79,7 @@
 /* CLASSES FOR SCHELL COMPONENTS */
 .banner {
   border-radius: 1.5em;
-  height: 530px;
+  height: 500px;
 }
 * {
   border-radius: var(--tkn-border-radius);

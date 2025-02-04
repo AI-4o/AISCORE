@@ -41,8 +41,8 @@ export const config = {
         { title: "La Liga", href: "/diretta/la-liga" },
         { title: "Pronostici", href: "/pronostici" },
         { title: "Scommesse Live", href: "/scommesse-live" },
-        { title: "Login", href: "/example/login" },
-        { title: "Registrazione", href: "/example/register" }
+        { title: "Login", href: "/auth/login" },
+        { title: "Registrazione", href: "/auth/register" }
     ],
     changeLog: [
         { version: "0.1.0", description: "Create homepage basic layout, add navigation" },

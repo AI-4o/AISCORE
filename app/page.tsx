@@ -28,7 +28,7 @@ export default function Home() {
       {/* Il tradizionale markup in React */}
       <div className="flex flex-col items-center">
         <h1>WINPRO - home</h1>
-        <div className="w-full flex justify-center items-centerm mt-5">
+        <div className="w-full flex justify-center mt-5">
           {/* <WidgetExample active={true} /> */}
             <DiretteTable {...fixtureParams} />
         </div>
