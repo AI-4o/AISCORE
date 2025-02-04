@@ -10,7 +10,7 @@ import './dirette-table.css'
 import DirettaRow from "../diretta-row/diretta-row"
 import { Fixture } from "api/api-football/models/fixture"
 import { useAppSelector, useAppDispatch } from "store/hooks"
-import { DataType, fetchFixtures } from "store/features/fixtures/fixturesSlice"
+import { fetchFixtures } from "store/features/fixtures/fixturesSlice"
 import { getAPIFootballParams } from "api/api-football/utils"
 import { useEffect, useState } from "react"
 import Spinner from "components/custom/spinner/spinner"
