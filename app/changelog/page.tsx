@@ -1,4 +1,4 @@
-import { config } from "@/appConfig";
+import { config } from "appConfig";
 
 export default function ChangeLog() {
     return (

@@ -1,4 +1,4 @@
-//import WidgetExample from "@/components/custom/widget-wrappers/widget-example";
+//import WidgetExample from "components/custom/widget-wrappers/widget-example";
 "use client"
 import { DiretteTable } from "../components/compositions/dirette-table/dirette-table";
 import { DataType, getAPIFootballParams } from "../app/api/api-football/utils";
