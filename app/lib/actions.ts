@@ -1,10 +1,11 @@
 "use server";
 import { signIn, signOut } from "../auth";
 import { AuthError } from "next-auth";
-import bcrypt from "bcrypt";
 import { User } from "./definitions";
 import { z } from "zod";
 import { sql } from "@vercel/postgres";
+import { Resend } from 'resend';
+
 
 export type DBResult<A> = {
   success: boolean;
@@ -13,6 +14,19 @@ export type DBResult<A> = {
   errorsMessage?: string;
 };
 
+
+const resend = new Resend(process.env.RESEND_KEY);
+
+
+export const sendEmail = async () => {
+const response = await resend.emails.send({
+  from: 'ai@aisoft.sh',
+  to: 'ai@aisoft.sh',
+  subject: 'Hello World',
+  html: '<p>Congrats on sending your <strong>first email</strong>!</p>'
+});
+return response;
+}
 // Utility type to transform properties into string[]
 export type TransformToStringArray<T> = {
   [K in keyof T]: string[];

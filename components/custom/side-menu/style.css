@@ -1,0 +1,35 @@
+.side-menu {
+  margin-block: 0.5rem;
+  border-radius: 0.5rem;
+  width: 220px;
+  height: 100%;
+  background-color: var(--tkn-interactive-background-secondary);
+  color: var(--color-white);
+  padding-block: 1rem;
+}
+
+.side-menu ul {
+  list-style-type: none;
+}
+
+.side-menu li {
+  margin-bottom: 0.5rem;
+}
+
+.side-menu a {
+  display: block;
+  text-decoration: none;
+  color: var(--color-white);
+  margin: var(--tkn-margin-inline);
+  border-radius: var(--tkn-border-radius);
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+.side-menu__li>div {
+  padding-inline: 1rem;
+}
+
+.side-menu__li:hover {
+  background-color: var(--tkn-interactive-hover);
+  color: var(--color-black);
+}

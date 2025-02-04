@@ -1,0 +1,22 @@
+.spinner-container, .modal-container, .lottie-container {
+    position: fixed;
+    /* Imposta la posizione a 50% dell'altezza del viewport: */
+    top: 50%;
+    /* Se desideri anche il centro orizzontale, puoi usare left: 50%; 
+       altrimenti lasci 30vw se ti serve solo un certo spostamento orizzontale: */
+    left: 50%;
+    /* Questo sposta l’elemento verso l’alto e verso sinistra di metà della sua dimensione,
+       centrando di fatto l’elemento rispetto al viewport: */
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+}
+
+    
+  .spinner-sibling-content {
+    transition: opacity 0.5s ease;
+  }
+  
+  .spinner-sibling-content.disabled, .lottie-container.disabled {
+    pointer-events: none; /* Disabilita l'interazione */
+    opacity: 0.5; /* Riduce l'opacità */
+  }

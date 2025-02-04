@@ -1,0 +1,60 @@
+/* Navbar with a dark gradient background to exude a strong, sporty vibe */
+.navbar {
+  background: linear-gradient(
+    135deg,
+    var(--color-dark-gradient-start),
+    var(--color-dark-gradient-end)
+  );
+  border-radius: 1em;
+  border-bottom: 1px solid white;
+}
+
+/* Dropdown with fade/slide animations */
+.navbar-dropdown {
+  position: absolute;
+  right: 0;
+  z-index: 9999;
+  background-color: var(--color-black);
+  border-radius: 0.5em;
+}
+
+/* When isOpen is true, show the dropdown with an opening animation */
+.navbar-dropdown.open {
+  display: block;
+  animation: fadeInDropdown 0.3s ease-in-out forwards;
+}
+
+.navbar-dropdown.closing {
+  animation: fadeOutDropdown 0.3s ease-in-out forwards;
+}
+.menu-item-link:hover {
+  color: var(--color-gold); /* Text color transitions to gold */
+}
+
+.menu-item-link:hover::after {
+  width: 100%;
+}
+
+/* Keyframes for fade + slight slide (opening) */
+@keyframes fadeInDropdown {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Keyframes for fade + slide up (closing) */
+@keyframes fadeOutDropdown {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}

@@ -1,0 +1,43 @@
+.page-wrapper {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.sfondo-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.navbar-wrapper,
+.banner-wrapper,
+.main-wrapper,
+.footer-wrapper {
+  margin: 0 auto;
+  width: 85vw;
+  max-width: 1200px;
+}
+
+.navbar-wrapper {
+  margin-top: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.banner-wrapper {
+}
+
+.main-content {
+  margin: 1rem;
+  width: 100%;
+}

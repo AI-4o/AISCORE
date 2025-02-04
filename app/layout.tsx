@@ -1,20 +1,21 @@
-import './globals.css';
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import { ThemeProvider } from "components/custom/theme-provider";
+import { Shell } from "components/compositions/shell/shell";
+import Image from "next/image";
+import "./globals.css";
+import { config } from "appConfig";
+import Footer from "components/custom/footer/footer";
+import StoreProvider from "./context/store-provider/store-provider";
 
-import { GeistSans } from 'geist/font/sans';
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["latin"],
+});
 
-let title = 'Next.js + Postgres Auth Starter';
-let description =
-  'This is a Next.js starter kit that uses NextAuth.js for simple email + password login and a Postgres database to persist the data.';
-
-export const metadata = {
-  title,
-  description,
-  twitter: {
-    card: 'summary_large_image',
-    title,
-    description,
-  },
-  metadataBase: new URL('https://nextjs-postgres-auth.vercel.app'),
+export const metadata: Metadata = {
+  title: "AISCORE360",
+  description: "Pronostici e analisi per il calcio",
 };
 
 export default function RootLayout({
@@ -22,9 +23,36 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const banner = (
+    <Image
+      className="banner"
+      src={config.banner}
+      alt={config.appName + " banner"}
+      width={1200}
+      height={900}
+    />
+  );
+  const footer = <Footer />;
   return (
-    <html lang="en">
-      <body className={GeistSans.variable}>{children}</body>
+    <html lang="en" suppressHydrationWarning>
+      <body className={`${inter.variable} antialiased`}>
+        <StoreProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="dark"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <Shell
+              navbarItems={config.navLinks}
+              banner={banner}
+              sfondoPath={config.sfondo}
+              mainChild={children}
+              footer={footer}
+            />
+          </ThemeProvider>
+        </StoreProvider>
+      </body>
     </html>
   );
 }

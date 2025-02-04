@@ -1,0 +1,17 @@
+.dirette-table {
+  padding-inline: 1rem;
+  padding-bottom: 1rem;
+}
+
+.dirette-table-content * {
+  border-radius: 0;
+}
+.dirette-table-accordion-trigger {
+  background-color: var(--tkn-interactive-background-primary);
+  border-radius: var(--tkn-border-radius);
+  padding-inline: 1rem;
+}
+
+.dirette-table-accordion-content {
+  padding-inline: 1rem;
+}

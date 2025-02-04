@@ -1,0 +1,9 @@
+.footer {
+    background-color: var(--tkn-interactive-background-secondary);
+    border-radius: var(--tkn-border-radius);
+    padding-block: var(--tkn-padding-block);
+    margin-block: var(--tkn-margin-block);
+    padding-inline: var(--tkn-padding-inline);
+    display: flex;
+    justify-content: center;
+}

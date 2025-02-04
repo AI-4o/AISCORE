@@ -6,11 +6,16 @@
     "skipLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@/components/*": ["components/*"],
+      "ui/*": ["components/ui/*"],
       "@/pages/*": ["pages/*"],
       "@/app/*": ["app/*"],
       "@/lib/*": ["lib/*"],
-      "@/styles/*": ["styles/*"]
+      "@/styles/*": ["styles/*"],
+      "utils": ["app/lib/utils"],
+      "actions": ["app/lib/actions"],
+      "appConfig": ["app/appConfig"],
+      "store": ["app/store"],
+      "api/*": ["app/api/*"]
     },
     "strict": true,
     "forceConsistentCasingInFileNames": true,
