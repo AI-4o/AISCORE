@@ -1,6 +1,7 @@
 import { NextAuthConfig } from 'next-auth';
 
 export const authConfig = {
+  secret: "qaf9KMaX39uOmvdgHqXEDhBd8lWFFZgPawD/kVrnlss=",
   pages: {
     signIn: '/login',
   },
@@ -19,8 +20,10 @@ export const authConfig = {
       } else if (isLoggedIn) {
         return Response.redirect(new URL('/protected', nextUrl));
       }
-
       return true;
+    },
+    redirect({ url, baseUrl }) {
+      return baseUrl + '/protected';
     },
   },
 } satisfies NextAuthConfig;

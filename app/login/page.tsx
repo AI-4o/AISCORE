@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { Form } from 'app/form';
-import { signIn } from 'app/auth';
+import { authenticate } from 'app/lib/actions';
 import { SubmitButton } from 'app/submit-button';
 
 export default function Login() {
@@ -14,14 +14,7 @@ export default function Login() {
           </p>
         </div>
         <Form
-          action={async (formData: FormData) => {
-            'use server';
-            await signIn('credentials', {
-              redirectTo: '/protected',
-              email: formData.get('email') as string,
-              password: formData.get('password') as string,
-            });
-          }}
+          action={authenticate}
         >
           <SubmitButton>Sign in</SubmitButton>
           <p className="text-center text-sm text-gray-600">
