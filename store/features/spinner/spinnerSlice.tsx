@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { Fixture, FixtureResponse } from "@/app/api/api-football/models/fixture"
-import { makeGetAPIRouteUrl } from "@/app/api/api-football/utils"
 import mockFixtures from "@/app/api/api-football/mock-responses/mock-fixtures/mock-fixtures-1.json";
 import mockTeam from "@/app/api/api-football/mock-responses/mock-teams/mock-teams-1.json";
 

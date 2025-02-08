@@ -1,0 +1,8 @@
+---
+description: set correct classes for html elements, in order to give the elements a style that conforms with the app concept
+globs: *.tsx
+---
+
+# Your rule content
+
+- the styles used in the app are listed in [globals.css](mdc:app/globals.css) and in [tailwind.config.ts](mdc:tailwind.config.ts)

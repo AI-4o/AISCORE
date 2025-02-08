@@ -27,25 +27,30 @@ export const config = {
     appName: "AISCORE360",
     appDescription: "Pronostici e analisi per il calcio",
     appUrl: "https://aiscore360.com",
+    mockAPICall: false,
+    writeMockAPICall: false,
     banner: "/banner.jpg",
     sfondo: "/sfondo.jpg",
     sidemenuItems: sideMenuProps,
     spinner: "https://lottie.host/82739a99-9fce-4535-9b4f-a3224f1a68a0/x4P2YjI7Si.lottie",
     blurDataUrlAPISort: "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDABQODxIPDRQSEBIXFRQdHx0fHRsdHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR3/2wBDAR0XFyAeIRMeIR0dITcdHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR3/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k=",
     navLinks: [
-        { title: "WINPRO", href: "/" },
-        { title: "Serie A", href: "/diretta/serie-a" },
-        { title: "Bundes Lega", href: "/diretta/bundes-lega" },
-        { title: "Premier League", href: "/diretta/premier-league" },
-        { title: "League One", href: "/diretta/league-one" },
-        { title: "La Liga", href: "/diretta/la-liga" },
-        { title: "Pronostici", href: "/pronostici" },
-        { title: "Scommesse Live", href: "/scommesse-live" },
-        { title: "Login", href: "/auth/login" },
-        { title: "Registrazione", href: "/auth/register" }
+        { title: "PREFERITI", href: "/preferiti" },
+        { title: "SERIE A", href: "/diretta/serie-a" },
+        { title: "BUNDES LEGA", href: "/diretta/bundes-lega" },
+        { title: "PREMIER LEAGUE", href: "/diretta/premier-league" },
+        { title: "LEAGUE ONE", href: "/diretta/league-one" },
+        { title: "LA LIGA", href: "/diretta/la-liga" },
+        { title: "PRONOSTICI", href: "/pronostici" },
+        { title: "SCOMMESSE LIVE", href: "/scommesse-live" },
+        { title: "LOGIN", href: "/auth/login" },
+        { title: "REGISTRAZIONE", href: "/auth/register" }
     ],
+    pagination: 15,
     changeLog: [
-        { version: "0.1.0", description: "Create homepage basic layout, add navigation" },
-        { version: "0.2.0", description: "Add widget for fixtures in homepage" }
+        { version: "1.0.0", description: "Aggiunta input-select con frecce giorno precedente e giorno successivo" },
+        { version: "1.0.0", description: "Fix layout partita con nomi e punteggi in orizzontale" },
+        { version: "1.0.0", description: "Fix non si vedono le partite relative a giorni successivi ad oggi" },
+        { version: "1.0.0", description: "Aggiunta funzione per aggiungere le partite e le leghe ai preferiti, a livello di store (se si ricarica la pagina si perdono i preferiti)" }
     ]
 }

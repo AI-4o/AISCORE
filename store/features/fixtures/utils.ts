@@ -1,6 +1,6 @@
 import { Fixture } from "api/api-football/models/fixture";
 import { League } from "api/api-football/models/league";
-import { compareDates, formatToYYYYMMDD } from "utils";
+import { compareDates, formatDateWithDay } from "utils";
 
 export type LeagueFixtures = Array<{
   league: League;
@@ -12,17 +12,20 @@ export type LeagueFixtures = Array<{
  * @param filterSortParams params for filtering and sorting
  * @returns LeagueFixtures
  */
-export const getDiretteTableData = (fixtures: Fixture[], filterSortParams?: any): LeagueFixtures => {
-
-  // filter fixtures by dateRange
-  if(filterSortParams?.dateRange) fixtures = filterFixturesByDateRange(fixtures, filterSortParams.dateRange);    
+export const getDiretteTableData = (fixtures: Fixture[], selectedDay: string): LeagueFixtures => {
 
   // sort fixtures by date
-  fixtures = sortFixturesByDate(fixtures);
+  fixtures = sortFixturesByDate(fixtures)
+  .filter(f => {
+    //console.log(formatDateWithDay(f.fixture.date), formatDateWithDay(selectedDay));
+    return formatDateWithDay(f.fixture.date) === formatDateWithDay(selectedDay)
+  });
   
   const leagues = Array.from(
     new Map(fixtures.map(fixture => [fixture.league.id, fixture.league])).values()
   );
+  //console.log('fixtures in getDiretteTableData: ', fixtures, leagues);
+  
   // costruisci leagueFixtures
   const leagueFixtures = leagues.map((league) => {
     const _fixtures = fixtures.filter(
@@ -50,10 +53,6 @@ const defaultSortingLeagues = (leagueId1: number, leagueId2: number): number => 
     if(!firstIds.includes(leagueId1) && firstIds.includes(leagueId2)) return 1;
     if(firstIds.includes(leagueId1) && firstIds.includes(leagueId2)) return firstIds.indexOf(leagueId1) - firstIds.indexOf(leagueId2);
     return 0;
-}
-
-const filterFixturesByDateRange = (fixtures: Fixture[], dateRange: string[]): Fixture[] => {
-  return fixtures.filter(fixture => dateRange.includes(formatToYYYYMMDD(fixture.fixture.date)));
 }
 
 const sortFixturesByDate = (fixtures: Fixture[]) => {

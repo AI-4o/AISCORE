@@ -8,7 +8,6 @@ const redis = new Redis({
 const testRedis = async () => {
     await redis.set('foo', 'bar');
     const data = await redis.get('foo');
-    console.log(data);
   }
   
   testRedis();

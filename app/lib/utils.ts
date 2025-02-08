@@ -100,3 +100,17 @@ export function formatDateWithDay(dateString: string): string {
 export function formatToYYYYMMDD(dateString: string): string {
   return dateString.split('T')[0];
 }
+
+/**
+ * Estrae l'orario da una stringa di data in formato ISO
+ * @param dateString - La data in formato "YYYY-MM-DDTHH:mm:ss+00:00"
+ * @returns L'orario in formato "hh:mm"
+ */
+export function extractTimeFromISO(dateString: string): string {
+  const timePart = dateString.split('T')[1];
+  if (!timePart) {
+    throw new Error('Formato data non valido');
+  }
+  const [hour, minute] = timePart.split(':');
+  return `${hour}:${minute}`;
+}

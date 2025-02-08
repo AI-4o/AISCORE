@@ -3,8 +3,8 @@
     min-width: 150px !important;
 }
 
-.select {
-    max-width: 150px !important;
+.select *{
+    max-width: 200px !important;
 }
 
 .number {

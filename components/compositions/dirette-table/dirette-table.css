@@ -10,8 +10,12 @@
   background-color: var(--tkn-interactive-background-primary);
   border-radius: var(--tkn-border-radius);
   padding-inline: 1rem;
+  display: flex;
+  align-items: center !important;
+  width: auto !important;
+  justify-content: space-between !important;
 }
 
-.dirette-table-accordion-content {
-  padding-inline: 1rem;
+.accordion-trigger-wrapper > h3 {
+  width: 100%;
 }

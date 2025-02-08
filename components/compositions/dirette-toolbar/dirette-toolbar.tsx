@@ -1,22 +1,21 @@
 'use client'
 import InputSelect from 'components/custom/inputs/input-select';
 import './style.css'
-import { formatDateWithDay } from 'utils'
+import { formatDateWithDay, getNextWeekDate, getLastWeekDate, getDateRange } from 'utils'
 import { ChangeEvent } from 'react';
 
 interface DiretteToolbarConfig {
-    dateRange: string[],
     onDateChange: (e: ChangeEvent<HTMLSelectElement>) => void
 }
 
-export default function DiretteToolbar({dateRange, onDateChange}: DiretteToolbarConfig) {
+export default function DiretteToolbar({onDateChange}: DiretteToolbarConfig) {
 
-
-    const selectDatesOptions = dateRange.map(date => ({ 
+    const selectDatesOptions = getDateRange(getLastWeekDate(), getNextWeekDate()).map((date: string) => ({ 
         value: date, 
         name: formatDateWithDay(date),
         element: <div>{formatDateWithDay(date)}</div>
     }))
+    const todayDate = selectDatesOptions.find(opt => formatDateWithDay(opt.value) === 'oggi');
 
     return (
         <div className="dirette-toolbar">
@@ -24,9 +23,11 @@ export default function DiretteToolbar({dateRange, onDateChange}: DiretteToolbar
                 <div>Dirette</div>
                 <div className='flex items-center justify-center'>
                     <InputSelect
+                        value = {todayDate?.value}
                         name="dates-select"
                         options={selectDatesOptions}
                         onChange={onDateChange}
+                        hasIncrementBtns={true}
                     />
                 </div>
             </div>
