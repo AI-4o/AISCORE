@@ -9,12 +9,11 @@ import {
 import './dirette-table.css'
 import DirettaRow from "../diretta-row/diretta-row"
 import { useAppSelector, useAppDispatch } from "store/hooks"
-import { fetchFixtures, toggleFavoriteLeague } from "store/features/fixtures/fixturesSlice"
+import { fetchFixtures, getFavouriteLeagueFixtures, selectLeagueFixturesByDay, toggleFavoriteLeague } from "store/features/fixtures/fixturesSlice"
 import { useEffect, useState } from "react"
 import Spinner from "components/custom/spinner/spinner"
 import { setIsActiveSpinner, setIsInactiveSpinner } from "store/features/spinner/spinnerSlice"
 import { config } from "appConfig"
-import { getDiretteTableData } from "store/features/fixtures/utils"
 import Image from "next/image"
 import DiretteToolbar from "../dirette-toolbar/dirette-toolbar"
 import { getTodayDate } from "utils"
@@ -27,18 +26,18 @@ export function DiretteTable(p: getAPIFootballParams) {
 
   // day to show in the table, set by the toolbar select
   const [dayToShow, setDayToShow] = useState<string>(getTodayDate());
+  const [showFavorites, setShowFavorites] = useState<boolean>(false);
 
-  const leagueFixtures = useAppSelector((state) => getDiretteTableData(state.football.fixtures, dayToShow)); // got from the store
-  const isFavoriteLeague = useAppSelector((state) =>
-    new Map(state.football.leagues.map(
-      (league) => {
-        return [league.id, league.isFavorite]
-      }
-    ))
-  );
+  // get the leagueFixtures of the day, filtered also by favorite if showFavorites is true
+  const leagueFixturesOfDay = useAppSelector((state) => {
+    const lfs = selectLeagueFixturesByDay(state.football, dayToShow)
+    if (showFavorites) return getFavouriteLeagueFixtures(lfs)
+    return lfs;
+  })
+
   useEffect(() => {
     dispatch(setIsActiveSpinner());
-    dispatch(fetchFixtures(p)); // TODO: set parallel fetching
+    dispatch(fetchFixtures(p));
     return () => {
       dispatch(setIsInactiveSpinner());
     }
@@ -46,23 +45,23 @@ export function DiretteTable(p: getAPIFootballParams) {
 
   useEffect(() => {
     // Disable spinner when dirette changes
-    if (leagueFixtures.length > 0) {
+    if (leagueFixturesOfDay.length > 0) {
       dispatch(setIsInactiveSpinner());
     }
-  }, [leagueFixtures, dispatch]);
+  }, [leagueFixturesOfDay, dispatch]);
 
   // DEBUG
   useEffect(() => {
-    (window as any).leagueFixtures = leagueFixtures
-  }, [leagueFixtures, dayToShow])
+    (window as any).leagueFixturesOfDay = leagueFixturesOfDay
+  }, [leagueFixturesOfDay, dayToShow])
 
   return (
     <div className="dirette-table w-full bg-secondary-football">
       <Spinner src={config.spinner}>
-        <DiretteToolbar onDateChange={(e) => setDayToShow(e.target.value)} />
+        <DiretteToolbar onDateChange={(e) => setDayToShow(e.target.value)} onShowFavoritesChange={(e) => setShowFavorites(e)} />
         <div className="dirette-table-content">
           <Accordion type="single" collapsible className="w-full">
-            {leagueFixtures.length > 0 && leagueFixtures.slice(0, config.pagination).map((fxt, index) => {
+            {leagueFixturesOfDay.length > 0 && leagueFixturesOfDay.slice(0, config.pagination).map((fxt, index) => {
 
               const league = fxt.league;
 
@@ -70,24 +69,21 @@ export function DiretteTable(p: getAPIFootballParams) {
                 <AccordionItem className="dirette-table-accordion-item" key={index} value={`item-${index + 1}`}>
                   <div className="flex w-full gap-4 accordion-trigger-wrapper">
                     <PreferitiIcon
-                      onSelected={(selected) => {
-                        dispatch(toggleFavoriteLeague(league.id));
-                        console.log("table: ", league.id, isFavoriteLeague.get(league.id));
-                      }}
-                      selected={isFavoriteLeague.get(league.id)}
+                      onSelected={(selected) => dispatch(toggleFavoriteLeague(fxt.league.id))}
+                      selected={fxt.league.isFavorite}
                     />
                     <AccordionTrigger className="dirette-table-accordion-trigger">
                       <div className="flex items-center gap-4">
                         <Image
-                          src={league.logo}
-                          alt={league.name}
+                          src={fxt.league.logo}
+                          alt={fxt.league.name}
                           width={20}
                           height={20}
                           loading="lazy"
                           placeholder="blur"
                           blurDataURL={config.blurDataUrlAPISort}
                         />
-                        <b>{league.name.toUpperCase()} {isFavoriteLeague.get(league.id)}</b>
+                        <b>{fxt.league.name.toUpperCase()} {fxt.league.id}</b>
                       </div>
                     </AccordionTrigger>
                   </div>

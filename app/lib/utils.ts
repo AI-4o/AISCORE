@@ -71,7 +71,7 @@ export function compareDates(d: string, c: string): number {
  * @param dateString - La data in formato ISO (YYYY-MM-DD)
  * @returns La data formattata con il giorno della settimana (es: "25-12 lunedì" o "oggi")
  */
-export function formatDateWithDay(dateString: string): string {
+export function formatDateWithDayName(dateString: string): string {
   const today = new Date();
   const inputDate = new Date(dateString);
   
@@ -97,7 +97,7 @@ export function formatDateWithDay(dateString: string): string {
  * @param dateString - Date string in format "YYYY-MM-DDTHH:mm:ss+00:00" 
  * @returns Date string in format "YYYY-MM-DD"
  */
-export function formatToYYYYMMDD(dateString: string): string {
+export function formatDateToYYYYMMDD(dateString: string): string {
   return dateString.split('T')[0];
 }
 
@@ -106,7 +106,7 @@ export function formatToYYYYMMDD(dateString: string): string {
  * @param dateString - La data in formato "YYYY-MM-DDTHH:mm:ss+00:00"
  * @returns L'orario in formato "hh:mm"
  */
-export function extractTimeFromISO(dateString: string): string {
+export function formatDateToHHmm(dateString: string): string {
   const timePart = dateString.split('T')[1];
   if (!timePart) {
     throw new Error('Formato data non valido');

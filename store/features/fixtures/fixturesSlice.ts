@@ -1,76 +1,66 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { Fixture, FixtureResponse } from "api/api-football/models/fixture";
-import { League } from "api/api-football/models/league";
+import {
+  FavoriteFixture,
+  FavoriteLeague,
+  FavoriteLeagueFixture,
+  FixtureResponse,
+} from "@/app/api/api-football/models/footballModels";
 import mockFixtures from "api/api-football/mock-responses/mock-fixtures/mock-fixtures-1.json";
 import { getAPIFootballParams } from "@/app/api/api-football/api-call.defs";
 import { config } from "appConfig";
 import qs from "qs";
+import { compareDates, formatDateToYYYYMMDD } from "@/app/lib/utils";
 
-export interface FixturesState {
-  fixtures: (Fixture & { isFavorite: boolean })[];
-  leagues: (League & { isFavorite: boolean })[];
+export interface FootballState {
+  fixtures: FavoriteFixture[];
+  leagues: FavoriteLeague[];
+  leaguesFixtures: FavoriteLeagueFixture[];
   status: "idle" | "loading" | "failed";
 }
 
-const initialState: FixturesState = {
+const initialState: FootballState = {
   fixtures: [],
   leagues: [],
+  leaguesFixtures: [],
   status: "idle",
 };
 
 // Slice -> used to create in 1 place reducers and actions logic,
 // - slice.actions returns the action creators
 // - slice.reducer returns the reducer
-export const fixturesSlice = createSlice({
+export const footballSlice = createSlice({
   name: "fixtures",
   initialState,
   reducers: {
-    toggleFavoriteFixture: (state, action) => {
-      const fixture = state.fixtures.find(
-        (fixture) => fixture.fixture.id === action.payload
-      );
-      if (fixture) {
-        fixture.isFavorite = !fixture.isFavorite;
-        const league = state.leagues.find(
-          (league) => league.id === getLeagueIdFromFixture(fixture)
-        );
-        if (league) {
-          if (fixture.isFavorite) {
-            // se fixture è stato aggiunto come preferito, aggiorniamo il valore di isFavorite del league
-            league.isFavorite = true;
-          } else {
-            // se fixture è stato rimosso come preferito, aggiorniamo il valore di isFavorite del league
-            const noFixtureIsFavorite = getFixturesOfLeague(state.fixtures, league.id).every((fixture) => !fixture.isFavorite);
-            console.log("noFixtureIsFavorite: ", noFixtureIsFavorite);
-            if (noFixtureIsFavorite) league.isFavorite = false;
-          }
+    toggleFavoriteFixture: (s, action) => {
+      const leagueFixtures = s.leaguesFixtures.find( // find the leagueFixtures object associated to the fixture
+        (leagueFixture) => leagueFixture.fixtures.find(f => f.fixture.id === action.payload)
+      )
+      const p = {
+        league: leagueFixtures?.league,
+        fixture: leagueFixtures?.fixtures.find(f => f.fixture.id === action.payload)
+      }
+      console.log("p: ", p.league?.name, p.fixture?.fixture.id);
+      if(p.fixture) {
+        p.fixture.isFavorite = !p.fixture.isFavorite;
+        if(p.league) {
+          p.league.isFavorite = leagueFixtures?.fixtures.some(f => f.isFavorite) ?? false;
         }
       }
     },
-    toggleFavoriteLeague: (state, action) => {
-      const league = state.leagues.find(
-        (league) => league.id == action.payload
+    toggleFavoriteLeague: (s, action) => {
+      const leagueFixture = s.leaguesFixtures.find(
+        (lf) => lf.league.id == action.payload
       );
-
-      console.log(
-        "toggleFavoriteLeague: ",
-        action.payload,
-        state.leagues,
-        league
-      );
-      if (league) {
-        league.isFavorite = !league.isFavorite;
-        const fixturesOfLeague = getFixturesOfLeague(state.fixtures, league.id);
-        if (league.isFavorite) {
+      if (leagueFixture) {
+        leagueFixture.league.isFavorite = !leagueFixture.league.isFavorite;
+        const fixturesOfLeague = leagueFixture.fixtures;
+        if (leagueFixture.league.isFavorite) {
           // se league è stato aggiunto come preferito, aggiorniamo il valore di isFavorite dei fixture di quella league
-          fixturesOfLeague.forEach((fixture) => {
-            fixture.isFavorite = true;
-          });
+          fixturesOfLeague.forEach((fixture) => fixture.isFavorite = true);
         } else {
           // se league è stato rimosso come preferito, aggiorniamo il valore di isFavorite dei fixture di quella league
-          fixturesOfLeague.forEach((fixture) => {
-            fixture.isFavorite = false;
-          });
+          fixturesOfLeague.forEach((fixture) => fixture.isFavorite = false);
         }
       }
     },
@@ -81,20 +71,22 @@ export const fixturesSlice = createSlice({
     builder
       // Handle the action types defined by the `incrementAsync` thunk defined below.
       // This lets the slice reducer update the state with request status and results.
-      .addCase(fetchFixtures.pending, (state) => {
-        state.status = "loading";
+      .addCase(fetchFixtures.pending, (s) => {
+        s.status = "loading";
       })
-      .addCase(fetchFixtures.fulfilled, (state, action) => {
-        state.status = "idle";
+      .addCase(fetchFixtures.fulfilled, (s, action) => {
+        s.status = "idle";
 
-        // set state of fixtures
-        const fixtures = action.payload
+        // get favoriteFixtures from API response
+        const fixtures = sortFixturesByDate(
+          action.payload
           .map((fixtureResponse) => fixtureResponse.response)
           .flat()
           // settiamo isFavorite a false per default
-          .map((fixture) => ({ ...fixture, isFavorite: false })); // TODO: se l'utente loggato, prendiamo il valore da db
+          .map((fixture) => ({ ...fixture, isFavorite: false }))
+        ); // TODO: se l'utente loggato, prendiamo il valore da db
 
-        // set state of leagues
+        // get favoriteLeagues from above favoriteFixtures
         const leagues = Array.from(
           new Map(
             fixtures
@@ -103,11 +95,23 @@ export const fixturesSlice = createSlice({
           ).values()
         ); // TODO: se l'utente loggato, prendiamo il valore da db
 
-        console.log("fixtures: ", fixtures);
-        console.log("leagues: ", leagues);
+        //console.log("fixtures: ", fixtures);
+        //console.log("leagues: ", leagues);
 
-        state.fixtures = fixtures;
-        state.leagues = leagues;
+
+        const leaguesFixtures = leagues.map((league) => {
+          const fixturesOfLeague = fixtures.filter(
+            (fixture) => fixture.league.id === league.id
+          );
+          return {
+            league: league,
+            fixtures: fixturesOfLeague,
+          };
+        }).sort((a, b) => defaultSortingLeagues(a.league.id, b.league.id));
+
+        s.fixtures = fixtures; // sort fixtures by date
+        s.leagues = leagues;
+        s.leaguesFixtures = leaguesFixtures;
       })
       .addCase(fetchFixtures.rejected, (state) => {
         state.status = "failed";
@@ -115,16 +119,15 @@ export const fixturesSlice = createSlice({
   },
 });
 
-export default fixturesSlice.reducer;
-export const { toggleFavoriteFixture, toggleFavoriteLeague } =
-  fixturesSlice.actions;
+export default footballSlice.reducer;
+export const { toggleFavoriteFixture, toggleFavoriteLeague } = footballSlice.actions;
 
 export const fetchFixtures = createAsyncThunk(
   "fixtures/fetchFixtures",
   async (params: getAPIFootballParams) => {
     let response: FixtureResponse[];
     if (!config.mockAPICall) {
-      console.log("params in the fetchFixtures slice: ", params.queryParams);
+      //console.log("params in the fetchFixtures slice: ", params.queryParams);
       // perform the api call if no fixtureResponse is provided
       response = await fetch(
         `/api/api-football/get-fixtures` +
@@ -141,29 +144,82 @@ export const fetchFixtures = createAsyncThunk(
     } else {
       // return the mock fixtures
       response = [mockFixtures] as unknown as FixtureResponse[];
-      console.log("mock response at slice level: ", response);
+      //console.log("mock response at slice level: ", response);
     }
     return response;
   }
 );
 
-const getFixturesIds = (fixtures: Fixture[]) => {
+export const getFixturesIds = (fixtures: FavoriteFixture[]) => {
   return fixtures.map((fixture) => fixture.fixture.id);
 };
 
-const getLeaguesIds = (leagues: League[]) => {
+export const getLeaguesIds = (leagues: FavoriteLeague[]) => {
   return leagues.map((league) => league.id);
 };
 
-export const getLeagueIdFromFixture = (fixture: Fixture) => {
-  return fixture.league.id;
-};
-
-export const getFixturesOfLeague = (
-  fixtures: Fixture[],
+/**
+ * Extract the fixtures of a given league from a given fixtures[]
+ * @param fixtures a fixtures[]
+ * @param leagueId the id of the league
+ * @returns the fixtures of a league
+ */
+export const extractFixturesByLeague = (
+  fixtures: FavoriteFixture[],
   leagueId: number
-): (Fixture & { isFavorite: boolean })[] => {
+): FavoriteFixture[] => {
   return fixtures.filter(
     (fixture) => fixture.league.id === leagueId
-  ) as (Fixture & { isFavorite: boolean })[];
+  ) as FavoriteFixture[];
 };
+
+/**
+ * This function is used in dirette-table.tsx to get the correct format to feed to the table, out of the fixtures[] of the store
+ * @param fixtures
+ * @param filterSortParams params for filtering and sorting
+ * @returns LeagueFixtures
+ */
+export const selectLeagueFixturesByDay = (
+  s: FootballState,
+  selectedDay: string
+): FavoriteLeagueFixture[] => {
+  // costruisci leagueFixtures
+  let diretteByDay = s.leaguesFixtures
+  .map(lf => ({
+    league: lf.league, 
+    fixtures: lf.fixtures.filter(f =>  formatDateToYYYYMMDD(f.fixture.date) === selectedDay)
+  })) // per ogni leagueFixture, mantieni solo le fixtures della data selezionata
+  //console.log("diretteByDay: ", diretteByDay)
+  diretteByDay = diretteByDay.filter(lf => lf.fixtures.length > 0) // rimuovi le leagueFixtures a cui non riumangono fixtures
+  return diretteByDay;
+};
+
+export const getFavouriteLeagueFixtures = (lfs: FavoriteLeagueFixture[]): FavoriteLeagueFixture[] => {
+ return lfs.map(lf => {
+  const hasSomeFavouriteFixture = lf.fixtures.some(f => f.isFavorite)
+  if(hasSomeFavouriteFixture) { // se la lf ha qualche favorite fixture, mantieni la lf e filtra le fixtures per isFavorite
+    return {
+      league: lf.league,
+      fixtures: lf.fixtures.filter(f => f.isFavorite)
+    }
+  }
+  return [];
+}).flat() // flatten per rimuovere i []
+}
+
+const sortFixturesByDate = (fixtures: FavoriteFixture[]) => {
+  // Create a new array before sorting
+  const sortedFixtures = [...fixtures].sort((a, b) =>
+    compareDates(a.fixture.date, b.fixture.date)
+  );
+  return sortedFixtures;
+};
+const defaultSortingLeagues = (leagueId1: number, leagueId2: number): number => {
+    // the ids of the leagues to be shown first
+    const firstIds = [ 135, 78, 39, 41, 140, 136]
+    if(!firstIds.includes(leagueId1) && !firstIds.includes(leagueId2)) return 1;
+    if(firstIds.includes(leagueId1) && !firstIds.includes(leagueId2)) return -1;
+    if(!firstIds.includes(leagueId1) && firstIds.includes(leagueId2)) return 1;
+    if(firstIds.includes(leagueId1) && firstIds.includes(leagueId2)) return firstIds.indexOf(leagueId1) - firstIds.indexOf(leagueId2);
+    return 0;
+}

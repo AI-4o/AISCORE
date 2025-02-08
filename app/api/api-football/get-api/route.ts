@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { DataType } from '../api-call.defs';
-import { FixtureResponse } from "../models/fixture";
+import { FixtureResponse } from "../models/footballModels";
 import { writeMockResponse } from '../actions/actions';
 import { config } from 'appConfig';
 import qs from 'qs';
@@ -14,7 +14,7 @@ export async function GET(request: NextRequest) {
         
         // set the url
         const url = `https://v3.football.api-sports.io/${params.dataType}?${qs.stringify(params.queryParams)}`;
-        console.log("url in the get-api route: ", url, params.queryParams);
+        //console.log("url in the get-api route: ", url, params.queryParams);
         
         // set the headers
         const myHeaders = new Headers();
@@ -30,7 +30,7 @@ export async function GET(request: NextRequest) {
         const res = await fetch(url, requestOptions).then(r => r.json()) as FixtureResponse;
         if (config.writeMockAPICall) await writeMockResponse(res, params.dataType as DataType, new Date().toISOString());
         
-        console.log("Dato restituito dalla route get-api: ", res);
+        //console.log("Dato restituito dalla route get-api: ", res);
         return NextResponse.json(res, { status: 200 })
     } catch (error) {
         console.error('Errore nella route get-api:', error);

@@ -1,21 +1,31 @@
 'use client'
 import InputSelect from 'components/custom/inputs/input-select';
 import './style.css'
-import { formatDateWithDay, getNextWeekDate, getLastWeekDate, getDateRange } from 'utils'
-import { ChangeEvent } from 'react';
+import { formatDateWithDayName, getNextWeekDate, getLastWeekDate, getDateRange } from 'utils'
+import { ChangeEvent, useState } from 'react';
+import { Button } from 'ui/button';
 
 interface DiretteToolbarConfig {
-    onDateChange: (e: ChangeEvent<HTMLSelectElement>) => void
+    onDateChange: (e: ChangeEvent<HTMLSelectElement>) => void,
+    onShowFavoritesChange: (showFavorites: boolean) => void
 }
 
-export default function DiretteToolbar({onDateChange}: DiretteToolbarConfig) {
+export default function DiretteToolbar({onDateChange, onShowFavoritesChange}: DiretteToolbarConfig) {
 
     const selectDatesOptions = getDateRange(getLastWeekDate(), getNextWeekDate()).map((date: string) => ({ 
         value: date, 
-        name: formatDateWithDay(date),
-        element: <div>{formatDateWithDay(date)}</div>
+        name: formatDateWithDayName(date),
+        element: <div>{formatDateWithDayName(date)}</div>
     }))
-    const todayDate = selectDatesOptions.find(opt => formatDateWithDay(opt.value) === 'oggi');
+    const todayDate = selectDatesOptions.find(opt => formatDateWithDayName(opt.value) === 'oggi');
+
+    const [showFavorites, setShowFavorites] = useState<boolean>(false);
+
+    const toggleShowFavorites = () => {
+        const newShowFavorites = !showFavorites;
+        setShowFavorites(newShowFavorites);
+        onShowFavoritesChange(newShowFavorites);
+    }
 
     return (
         <div className="dirette-toolbar">
@@ -29,6 +39,13 @@ export default function DiretteToolbar({onDateChange}: DiretteToolbarConfig) {
                         onChange={onDateChange}
                         hasIncrementBtns={true}
                     />
+                    <Button 
+                        onClick={toggleShowFavorites}
+                        variant="outline"
+                        className="bg-secondary-football hover:bg-primary-football text-white font-bold"
+                    >
+                        {showFavorites ? 'TUTTI' : 'PREFERITI'}
+                    </Button>
                 </div>
             </div>
         </div>

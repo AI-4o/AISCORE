@@ -1,30 +1,27 @@
 "use client"
-import { Fixture } from "api/api-football/models/fixture";
+import { FavoriteFixture } from "@/app/api/api-football/models/footballModels";
 import './diretta-row.css'
 import { config } from 'appConfig';
 import Image from 'next/image';
 import PreferitiIcon from "components/custom/preferiti-icon/preferiti-icon";
-import { extractTimeFromISO } from "app/lib/utils";
+import { formatDateToHHmm } from "app/lib/utils";
 import { toggleFavoriteFixture } from "store/features/fixtures/fixturesSlice";
 import { useAppSelector, useAppDispatch } from "store/hooks"
 
-export default function DirettaRow(fixture: Fixture) {
+export default function DirettaRow(fixture: FavoriteFixture) {
 
     const dispatch = useAppDispatch();
 
-    const _fixture = fixture.fixture;
-    const isFavoriteFixture = useAppSelector((state) => state.football.fixtures.find((f) => f.fixture.id === _fixture.id)?.isFavorite);
-    const isFavoriteLeague = useAppSelector((state) => state.football.leagues.find((l) => l.id === fixture.league.id)?.isFavorite);
+    const fixture0 = fixture.fixture;
     const onClickStarBtn = () => {
-        dispatch(toggleFavoriteFixture(_fixture.id));
-        console.log("row: ", fixture.league.id, isFavoriteLeague);
+        dispatch(toggleFavoriteFixture(fixture.fixture.id));
     }
 
     return (
         <div className="diretta-row grid items-center" style={{ gridTemplateColumns: '5% 10% 30% 10% 30% 15%' }}>
-            <PreferitiIcon onSelected={onClickStarBtn} selected={isFavoriteFixture} />
+            <PreferitiIcon onSelected={onClickStarBtn} selected={fixture.isFavorite} />
             <div className="text-center">
-                <b>{extractTimeFromISO(_fixture.date)}</b>
+                <b>{formatDateToHHmm(fixture0.date)}</b>
             </div>
             <div className="flex items-center gap-3 whitespace-nowrap overflow-hidden">
                 <Image
@@ -56,7 +53,7 @@ export default function DirettaRow(fixture: Fixture) {
                 <b className="truncate">{fixture.teams.away.name.toUpperCase()}</b>
             </div>
             <div className="text-center">
-                {_fixture.status.short === 'NS' && <p>preview</p>}
+                {fixture0.status.short === 'NS' && <p>preview</p>}
             </div>
         </div>
     );

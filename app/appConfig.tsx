@@ -51,6 +51,7 @@ export const config = {
         { version: "1.0.0", description: "Aggiunta input-select con frecce giorno precedente e giorno successivo" },
         { version: "1.0.0", description: "Fix layout partita con nomi e punteggi in orizzontale" },
         { version: "1.0.0", description: "Fix non si vedono le partite relative a giorni successivi ad oggi" },
-        { version: "1.0.0", description: "Aggiunta funzione per aggiungere le partite e le leghe ai preferiti, a livello di store (se si ricarica la pagina si perdono i preferiti)" }
+        { version: "1.0.0", description: "Aggiunta funzione per aggiungere le partite e le leghe ai preferiti, a livello di store (se si ricarica la pagina si perdono i preferiti)" },
+        { version: "1.0.0", description: "Aggiunta funzione mostrare solo le partite preferite" }
     ]
 }
