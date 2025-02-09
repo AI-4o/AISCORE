@@ -85,6 +85,17 @@
   border-radius: var(--tkn-border-radius);
 }
 
+
+.shadow-gold-bottom {
+  border-radius: 0;
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.shadow-gold-bottom:hover {
+  box-shadow: 0 4px 0 -2px rgba(255, 215, 0, 0.8);
+}
+
+
 @layer base {
   * {
     @apply border-border;

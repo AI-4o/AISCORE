@@ -1,17 +1,17 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import Link from "next/link"
-import { cn } from "utils"
+import * as React from "react";
+import Link from "next/link";
+import { cn } from "utils";
 import {
-    NavigationMenu,
-    NavigationMenuItem,
-    NavigationMenuLink,
-    NavigationMenuList,
-} from "ui/navigation-menu"
-import { Button } from "components/ui/button"
-import { Menu } from "lucide-react"
-import "./style.css"
+  NavigationMenu,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+} from "ui/navigation-menu";
+import { Button } from "components/ui/button";
+import { Menu } from "lucide-react";
+import "./style.css";
 
 /**
              1. home
@@ -26,103 +26,111 @@ import "./style.css"
  */
 
 export type NavbarItemProps = {
-    title: string;
-    href: string;
-}
+  title: string;
+  href: string;
+};
 export type NavbarProps = {
-    items: NavbarItemProps[];
-}
+  items: NavbarItemProps[];
+};
 
 export function Navbar({ items }: NavbarProps) {
-    const [isOpen, setIsOpen] = React.useState(false)
-    const [openClasses, setOpenClasses] = React.useState('');
+  const [isOpen, setIsOpen] = React.useState(false);
+  const [openClasses, setOpenClasses] = React.useState("");
 
-    const toggleMenuDropdown = () => {
-        if (!isOpen) {
-            setIsOpen(true);
-            setOpenClasses("open");
-        } else {
-            setOpenClasses("closing");
-        }
+  const toggleMenuDropdown = () => {
+    if (!isOpen) {
+      setIsOpen(true);
+      setOpenClasses("open");
+    } else {
+      setOpenClasses("closing");
     }
-    React.useEffect(() => {
-        if (openClasses === "closing") {
-            setTimeout(() => {
-                setIsOpen(false);
-            }, 300);
-        }
-    }, [openClasses])
-    return (
-        <header className="navbar border-b-slate-200 bg-black w-full">
-            <div className="mx-auto flex items-center justify-between px-4 py-4 md:px-6 lg:px-8">
-                <Link href="/" className="text-lg font-semibold hover:opacity-80">
-                    AISCORE360
-                </Link>
-                <div className="md:hidden">
-                    <Button variant="ghost" size="icon" onClick={toggleMenuDropdown}>
-                        <Menu className="h-5 w-5" />
-                    </Button>
-                </div>
-            </div>
-            <div className="hidden justify-between px-4 pb-2 md:flex md:px-6 lg:px-8">
-                <NavigationMenu>
-                    <NavigationMenuList className="flex space-x-4">
-                        {items.map((item) => (
-                            <NavbarItem key={item.title} title={item.title} href={item.href} />
-                        ))}
-                    </NavigationMenuList>
-                </NavigationMenu>
-            </div>
+  };
+  React.useEffect(() => {
+    if (openClasses === "closing") {
+      setTimeout(() => {
+        setIsOpen(false);
+      }, 300);
+    }
+  }, [openClasses]);
+  return (
+    <header className="navbar border-b-slate-200 bg-black w-full">
+      <div className="mx-auto flex items-center justify-between px-4 py-4 md:px-6 lg:px-8">
+        <Link href="/" className="text-lg font-semibold hover:opacity-80">
+          AISCORE360
+        </Link>
+        <div className="md:hidden">
+          <Button variant="ghost" size="icon" onClick={toggleMenuDropdown}>
+            <Menu className="h-5 w-5" />
+          </Button>
+        </div>
+      </div>
+      <div className="hidden justify-between px-4 pb-2 md:flex md:px-6 lg:px-8">
+        <NavigationMenu>
+          <NavigationMenuList className="flex space-x-4">
+            {items.map((item) => (
+              <NavbarItem
+                key={item.title}
+                title={item.title}
+                href={item.href}
+              />
+            ))}
+          </NavigationMenuList>
+        </NavigationMenu>
+      </div>
 
-            {isOpen && (
-                <div className={`navbar-dropdown ${openClasses}`}>
-                    <NavigationMenu>
-                        <NavigationMenuList className="flex flex-col p-4 space-y-2">
-                            {items.map((item) => (
-                                <NavbarItem key={item.title} title={item.title} href={item.href} />
-                            ))}
-                        </NavigationMenuList>
-                    </NavigationMenu>
-                </div>
-            )}
-        </header>
-    )
+      {isOpen && (
+        <div className={`navbar-dropdown ${openClasses}`}>
+          <NavigationMenu>
+            <NavigationMenuList className="flex flex-col p-4 space-y-2">
+              {items.map((item) => (
+                <NavbarItem
+                  key={item.title}
+                  title={item.title}
+                  href={item.href}
+                />
+              ))}
+            </NavigationMenuList>
+          </NavigationMenu>
+        </div>
+      )}
+    </header>
+  );
 }
 
 const ListItem = React.forwardRef<
-    React.ElementRef<"a">,
-    React.ComponentPropsWithoutRef<"a">
+  React.ElementRef<"a">,
+  React.ComponentPropsWithoutRef<"a">
 >(({ className, title, children, ...props }, ref) => {
-    return (
-        <li>
-            <NavigationMenuLink asChild>
-                <a
-                    ref={ref}
-                    className={cn(
-                        "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
-                        className
-                    )}
-                    {...props}
-                >
-                    <div className="text-sm font-medium leading-none">{title}</div>
-                    <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-                        {children}
-                    </p>
-                </a>
-            </NavigationMenuLink>
-        </li>
-    )
-})
-ListItem.displayName = "ListItem"
+  return (
+    <li>
+      <NavigationMenuLink asChild>
+        <a
+          ref={ref}
+          className={cn(
+            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
+            className,
+          )}
+          {...props}
+        >
+          <div className="text-sm font-medium leading-none">{title}</div>
+          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+            {children}
+          </p>
+        </a>
+      </NavigationMenuLink>
+    </li>
+  );
+});
+ListItem.displayName = "ListItem";
 
 const NavbarItem = ({ title, href }: NavbarItemProps) => {
-    return (
-        <NavigationMenuItem>
-            <Link href={href} legacyBehavior passHref>
-                <NavigationMenuLink className="menu-item-link">
-                    {title}
-                </NavigationMenuLink>
-            </Link>
-        </NavigationMenuItem>
-    )
-}
+  return (
+    <NavigationMenuItem>
+      <Link href={href} legacyBehavior passHref>
+        <NavigationMenuLink className="menu-item-link">
+          {title}
+        </NavigationMenuLink>
+      </Link>
+    </NavigationMenuItem>
+  );
+};

@@ -1,7 +1,7 @@
-import Link from 'next/link';
-import { Form } from 'app/form';
-import { authenticate } from 'app/lib/actions';
-import { SubmitButton } from 'app/submit-button';
+import Link from "next/link";
+import { Form } from "app/form";
+import { authenticate } from "app/lib/actions";
+import { SubmitButton } from "app/submit-button";
 
 export default function Login() {
   return (
@@ -13,16 +13,14 @@ export default function Login() {
             Use your email and password to sign in
           </p>
         </div>
-        <Form
-          action={authenticate}
-        >
+        <Form action={authenticate}>
           <SubmitButton>Sign in</SubmitButton>
           <p className="text-center text-sm text-gray-600">
             {"Don't have an account? "}
             <Link href="/register" className="font-semibold text-gray-800">
               Sign up
             </Link>
-            {' for free.'}
+            {" for free."}
           </p>
         </Form>
       </div>

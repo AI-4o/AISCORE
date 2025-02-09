@@ -32,6 +32,7 @@ export default function RootLayout({
       height={700}
     />
   );
+
   const footer = <Footer />;
   return (
     <html lang="en" suppressHydrationWarning>

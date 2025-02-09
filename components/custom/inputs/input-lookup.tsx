@@ -1,22 +1,28 @@
-'use client';
+"use client";
 
-import React, { useState, ChangeEvent, MouseEvent } from 'react';
+import React, { useState, ChangeEvent, MouseEvent } from "react";
 
 type InputLookupProps = {
   label?: string;
   name?: string;
   options: string[];
   defaultValue?: string;
-  onChange?: (e:any) => void;
+  onChange?: (e: any) => void;
 };
 
-export function InputLookup({ label, defaultValue, name, options, onChange }: InputLookupProps) {
+export function InputLookup({
+  label,
+  defaultValue,
+  name,
+  options,
+  onChange,
+}: InputLookupProps) {
   const [inputValue, setInputValue] = useState(defaultValue ?? "");
   const [showDropdown, setShowDropdown] = useState(false);
 
   // Filter the options based on current input value
   const filteredOptions = options.filter((option) =>
-    option.toLowerCase().includes(inputValue.toLowerCase())
+    option.toLowerCase().includes(inputValue.toLowerCase()),
   );
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -24,10 +30,13 @@ export function InputLookup({ label, defaultValue, name, options, onChange }: In
     setShowDropdown(true);
   };
 
-  const handleOptionClick = (event: MouseEvent<HTMLLIElement>, selected: string) => {
+  const handleOptionClick = (
+    event: MouseEvent<HTMLLIElement>,
+    selected: string,
+  ) => {
     setInputValue(selected);
     setShowDropdown(false);
-    if(onChange) onChange({target: {value: selected}});
+    if (onChange) onChange({ target: { value: selected } });
   };
 
   const handleBlur = () => {

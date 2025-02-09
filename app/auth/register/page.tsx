@@ -1,21 +1,21 @@
-import Link from 'next/link';
-import { Form } from 'app/form';
-import { redirect } from 'next/navigation';
-import { createUser, getUser } from 'app/lib/actions';
-import { SubmitButton } from 'app/submit-button';
+import Link from "next/link";
+import { Form } from "app/form";
+import { redirect } from "next/navigation";
+import { createUser, getUser } from "app/lib/actions";
+import { SubmitButton } from "app/submit-button";
 
 export default function Login() {
   async function register(formData: FormData) {
-    'use server';
-    let email = formData.get('email') as string;
-    let password = formData.get('password') as string;
+    "use server";
+    let email = formData.get("email") as string;
+    let password = formData.get("password") as string;
     let user = await getUser(email);
 
     if (user) {
-      return 'User already exists'; // TODO: Handle errors with useFormStatus
+      return "User already exists"; // TODO: Handle errors with useFormStatus
     } else {
       await createUser(formData);
-      redirect('/login');
+      redirect("/login");
     }
   }
 
@@ -31,11 +31,11 @@ export default function Login() {
         <Form action={register}>
           <SubmitButton>Sign Up</SubmitButton>
           <p className="text-center text-sm text-gray-600">
-            {'Already have an account? '}
+            {"Already have an account? "}
             <Link href="/login" className="font-semibold text-gray-800">
               Sign in
             </Link>
-            {' instead.'}
+            {" instead."}
           </p>
         </Form>
       </div>
