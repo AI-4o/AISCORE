@@ -48,7 +48,6 @@ export default function InputSelect({
             target: o,
         } as React.ChangeEvent<HTMLSelectElement>;
         onChange?.(fakeEvent);
-        console.log("selectedValue", o, options);
     };
 
 
@@ -72,8 +71,9 @@ export default function InputSelect({
                                 onClick={(e) => {
                                     e.stopPropagation();
                                     const currentIndex = options.findIndex(
-                                        (opt) => opt.value === selectedOpt?.value,
+                                        (opt) => opt.name === selectedOpt?.name,
                                     );
+                                    console.log("currentIndex: ", selectedOpt, selectedOpt?.name, currentIndex, "options: ", options, options[currentIndex - 1])
                                     if (currentIndex > 0) {
                                         handleSelect(options[currentIndex - 1]);
                                     }
@@ -116,7 +116,7 @@ export default function InputSelect({
                                 onClick={(e) => {
                                     e.stopPropagation();
                                     const currentIndex = options.findIndex(
-                                        (opt) => opt.value === selectedOpt?.value,
+                                        (opt) => opt.name === selectedOpt?.name,
                                     );
                                     if (currentIndex < options.length - 1) {
                                         handleSelect(options[currentIndex + 1]);

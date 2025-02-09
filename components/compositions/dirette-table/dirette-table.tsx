@@ -121,7 +121,6 @@ export function DiretteTable(p: getAPIFootballParams) {
                           }
                           selected={fxt.league.isFavorite}
                         />
-
                         <AccordionTrigger
                           className="dirette-table-accordion-trigger"
                           onClick={() => toggleAccordion(index) }
@@ -138,7 +137,7 @@ export function DiretteTable(p: getAPIFootballParams) {
                             />
 
                             <b>
-                              {fxt.league.name.toUpperCase()} {fxt.league.id}
+                              {fxt.league.name.toUpperCase()}
                             </b>
                           </div>
                         </AccordionTrigger>
