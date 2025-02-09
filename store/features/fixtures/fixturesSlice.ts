@@ -24,7 +24,6 @@ const initialState: FootballState = {
   leaguesFixtures: [],
   status: "idle",
 };
-
 // Slice -> used to create in 1 place reducers and actions logic,
 // - slice.actions returns the action creators
 // - slice.reducer returns the reducer
@@ -40,7 +39,6 @@ export const footballSlice = createSlice({
         league: leagueFixtures?.league,
         fixture: leagueFixtures?.fixtures.find(f => f.fixture.id === action.payload)
       }
-      console.log("p: ", p.league?.name, p.fixture?.fixture.id);
       if(p.fixture) {
         p.fixture.isFavorite = !p.fixture.isFavorite;
         if(p.league) {
@@ -95,10 +93,6 @@ export const footballSlice = createSlice({
           ).values()
         ); // TODO: se l'utente loggato, prendiamo il valore da db
 
-        //console.log("fixtures: ", fixtures);
-        //console.log("leagues: ", leagues);
-
-
         const leaguesFixtures = leagues.map((league) => {
           const fixturesOfLeague = fixtures.filter(
             (fixture) => fixture.league.id === league.id
@@ -127,7 +121,7 @@ export const fetchFixtures = createAsyncThunk(
   async (params: getAPIFootballParams) => {
     let response: FixtureResponse[];
     if (!config.mockAPICall) {
-      //console.log("params in the fetchFixtures slice: ", params.queryParams);
+      ////console.log("params in the fetchFixtures slice: ", params.queryParams);
       // perform the api call if no fixtureResponse is provided
       response = await fetch(
         `/api/api-football/get-fixtures` +
@@ -144,7 +138,7 @@ export const fetchFixtures = createAsyncThunk(
     } else {
       // return the mock fixtures
       response = [mockFixtures] as unknown as FixtureResponse[];
-      //console.log("mock response at slice level: ", response);
+      ////console.log("mock response at slice level: ", response);
     }
     return response;
   }
@@ -181,16 +175,21 @@ export const extractFixturesByLeague = (
  */
 export const selectLeagueFixturesByDay = (
   s: FootballState,
-  selectedDay: string
+  selectedDay: Date
 ): FavoriteLeagueFixture[] => {
   // costruisci leagueFixtures
+  //console.log("selectedDay: ", selectedDay, s.leaguesFixtures.length)
+  
   let diretteByDay = s.leaguesFixtures
   .map(lf => ({
     league: lf.league, 
-    fixtures: lf.fixtures.filter(f =>  formatDateToYYYYMMDD(f.fixture.date) === selectedDay)
+    fixtures: lf.fixtures.filter(f =>  {
+      //console.log("f.fixture.date: ", f.fixture.date, "selectedDay: ", selectedDay); 
+      return (new Date(f.fixture.date)).toDateString() == selectedDay.toDateString()
+    })
   })) // per ogni leagueFixture, mantieni solo le fixtures della data selezionata
   //console.log("diretteByDay: ", diretteByDay)
-  diretteByDay = diretteByDay.filter(lf => lf.fixtures.length > 0) // rimuovi le leagueFixtures a cui non riumangono fixtures
+  diretteByDay = diretteByDay.filter(lf => lf.fixtures.length > 0) // rimuovi le leagueFixtures a cui non rimangono fixtures
   return diretteByDay;
 };
 

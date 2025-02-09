@@ -15,20 +15,20 @@ interface DiretteToolbarConfig {
   onShowFavoritesChange: (showFavorites: boolean) => void;
 }
 
-export default function DiretteToolbar({
-  onDateChange,
-  onShowFavoritesChange,
-}: DiretteToolbarConfig) {
+export default function DiretteToolbar({ onDateChange, onShowFavoritesChange }: DiretteToolbarConfig) {
+
+  
   const selectDatesOptions = getDateRange(
     getLastWeekDate(),
-    getNextWeekDate(),
-  ).map((date: string) => ({
-    value: date,
+    getNextWeekDate()
+  ).map((date: Date) => ({
+    value: date.toISOString(),
     name: formatDateWithDayName(date),
     element: <div>{formatDateWithDayName(date)}</div>,
   }));
+
   const todayDate = selectDatesOptions.find(
-    (opt) => formatDateWithDayName(opt.value) === "oggi",
+    (o) => o.name === "OGGI",
   );
 
   const [showFavorites, setShowFavorites] = useState<boolean>(false);

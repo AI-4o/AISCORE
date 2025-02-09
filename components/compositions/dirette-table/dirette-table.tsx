@@ -24,7 +24,6 @@ import {
 import { config } from "appConfig";
 import Image from "next/image";
 import DiretteToolbar from "../dirette-toolbar/dirette-toolbar";
-import { getTodayDate } from "utils";
 import { getAPIFootballParams } from "api/api-football/api-call.defs";
 import PreferitiIcon from "components/custom/preferiti-icon/preferiti-icon";
 
@@ -32,7 +31,7 @@ export function DiretteTable(p: getAPIFootballParams) {
   const dispatch = useAppDispatch();
 
   // day to show in the table, set by the toolbar select
-  const [dayToShow, setDayToShow] = useState<string>(getTodayDate());
+  const [dayToShow, setDayToShow] = useState<Date>(new Date());
   const [showFavorites, setShowFavorites] = useState<boolean>(false);
 
   const [openAccordionsVls, setOpenAccordionsVls] = useState<string[]>(
@@ -54,6 +53,8 @@ export function DiretteTable(p: getAPIFootballParams) {
     if (showFavorites) return getFavouriteLeagueFixtures(lfs);
     return lfs;
   });
+  const leagueFixtures = useAppSelector((state) => state.football.leaguesFixtures);
+  const fixtures = useAppSelector((state) => state.football.fixtures);
 
   useEffect(() => {
     dispatch(setIsActiveSpinner());
@@ -71,13 +72,16 @@ export function DiretteTable(p: getAPIFootballParams) {
   // DEBUG
   useEffect(() => {
     (window as any).leagueFixturesOfDay = leagueFixturesOfDay;
-  }, [leagueFixturesOfDay, dayToShow]);
+    (window as any).leagueFixtures = leagueFixtures;
+    (window as any).fixtures = fixtures;
+
+  }, [leagueFixturesOfDay, dayToShow, leagueFixtures, fixtures]);
 
   return (
     <div className="dirette-table w-full bg-secondary-football">
       <Spinner src={config.spinner}>
         <DiretteToolbar
-          onDateChange={(e) => setDayToShow(e.target.value)}
+          onDateChange={(e) => setDayToShow(new Date(e.target.value))}
           onShowFavoritesChange={(e) => setShowFavorites(e)}
         />
         <div className="dirette-table-content">

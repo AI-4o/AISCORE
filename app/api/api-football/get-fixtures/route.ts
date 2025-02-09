@@ -1,12 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getLastWeekDate } from '@/app/lib/utils';
+import { formatDateToYYYYMMDD, getLastWeekDate } from '@/app/lib/utils';
 import { getNextWeekDate } from '@/app/lib/utils';
 import { getDateRange } from '@/app/lib/utils';
 import { FixtureResponse } from '../models/footballModels';
 
 const API_FOOTBALL_KEY = process.env.API_FOOTBALL_KEY;
 
-// get api data
+// get api data of the fixtures of +- 7 days
 export async function GET(request: NextRequest) {
     try {        
         // set the url
@@ -23,10 +23,10 @@ export async function GET(request: NextRequest) {
         };
         const dates = getDateRange(getLastWeekDate(), getNextWeekDate());
         const requests = dates.map( (date) => {
-            const url = BASE_URL + `date=${date}`;
+            const url = BASE_URL + `date=${formatDateToYYYYMMDD(date.toISOString())}`;
             return fetch(url, requestOptions).then(r => r.json())})
         const res = await Promise.all(requests) as FixtureResponse[];
-        //console.log("Dato restituito dalla route get-fixtures: ", res);
+        console.log("Dato restituito dalla route get-fixtures: ", res);
         return NextResponse.json(res, { status: 200 })
     } catch (error) {
         console.error('Errore nella route get-api:', error);
