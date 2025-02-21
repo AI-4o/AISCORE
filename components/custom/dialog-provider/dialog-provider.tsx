@@ -2,7 +2,7 @@
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "components/ui/dialog";
 import { Button } from "components/ui/button";
 import { useAppSelector, useAppDispatch } from "store/hooks";
-import { toggleSpinner } from "@/app/store/features/dialog/dialogSlice";
+import { toggleDialog } from "@/app/store/features/dialog/dialogSlice";
 import { useEffect } from "react";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import { config } from "appConfig";
@@ -16,7 +16,7 @@ export default function DialogProvider() {
 
     const dispatch = useAppDispatch();
 
-    const close = () => dispatch(toggleSpinner());
+    const close = () => dispatch(toggleDialog());
 
     useEffect(() => {
         if (autoclose) setTimeout(() => close(), 1000);

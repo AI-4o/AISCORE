@@ -7,20 +7,40 @@ import PreferitiIcon from "components/custom/preferiti-icon/preferiti-icon";
 import { formatDateToHHmm } from "app/lib/utils";
 import { toggleFavoriteFixture } from "store/features/fixtures/fixturesSlice";
 import { useAppSelector, useAppDispatch } from "store/hooks";
+import { toggleDialog } from "@/app/store/features/dialog/dialogSlice";
+import Statistics from "components/custom/statistics/statistics";
 
 
 export default function DirettaRow(fixture: FavoriteFixture) {
   const dispatch = useAppDispatch();
 
   const fixture0 = fixture.fixture;
-  console.log('oiuytrew', fixture);
 
   const onClickStarBtn = () => {
     dispatch(toggleFavoriteFixture(fixture.fixture.id));
   };
 
-  const onClickRow = () => {
-    console.log('clicked');
+  const onClickRow = async () => {
+    const fixtureInfo = await fetch(`/api/api-football/statistics/?fixture=${fixture.fixture.id}&team1=${fixture.teams.home.id}&team2=${fixture.teams.away.id}`)
+    .then(r => r.json())
+    console.log('fixture info: ', fixtureInfo);
+    const [aStats, bStats] = fixtureInfo.map((x: any) => x.response[0]);
+    // if both teams have statistics for the fixture, then show the statistics
+   if(Math.min(aStats.statistics.length, bStats.statistics.length) > 0) {
+    console.log('statistics: ', aStats.statistics, bStats.statistics);
+
+    dispatch(toggleDialog({
+      content: {
+        header: <div>
+          <h1>Statistics</h1>
+        </div>,
+        body: <div>
+          <Statistics statisticsA={aStats.statistics} statisticsB={bStats.statistics} />   
+        </div>
+      }
+    }))
+
+   }
   }
 
   return (

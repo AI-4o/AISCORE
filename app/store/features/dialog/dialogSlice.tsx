@@ -31,7 +31,7 @@ export const spinnerSlice = createSlice({
   name: "spinner",
   initialState,
   reducers: {
-    toggleSpinner: (state, action: PayloadAction<TogglePayload | undefined>) => {
+    toggleDialog: (state, action: PayloadAction<TogglePayload | undefined>) => {
       state.isActive = !state.isActive;
       state.isSpinner = !!action?.payload?.isSpinner;
 
@@ -47,5 +47,5 @@ export const spinnerSlice = createSlice({
 });
 
 export default spinnerSlice.reducer;
-export const { toggleSpinner } =
+export const { toggleDialog } =
   spinnerSlice.actions;

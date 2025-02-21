@@ -16,7 +16,7 @@ import {
   toggleFavoriteLeague,
 } from "store/features/fixtures/fixturesSlice";
 import { useEffect, useState } from "react";
-import { toggleSpinner } from "@/app/store/features/dialog/dialogSlice";
+import { toggleDialog } from "@/app/store/features/dialog/dialogSlice";
 import { config } from "appConfig";
 import Image from "next/image";
 import DiretteToolbar from "../dirette-toolbar/dirette-toolbar";
@@ -56,10 +56,10 @@ export function DiretteTable(p: getAPIFootballParams) {
   const fixtures = useAppSelector((state) => state.football.fixtures);
 
   useEffect(() => {
-    dispatch(toggleSpinner({ isSpinner: true }));
+    dispatch(toggleDialog({ isSpinner: true }));
     dispatch(fetchFixtures(p));
     return () => {
-      dispatch(toggleSpinner({ }));
+      dispatch(toggleDialog({ }));
     };
   }, []);
 
