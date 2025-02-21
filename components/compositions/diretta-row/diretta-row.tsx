@@ -9,6 +9,7 @@ import { toggleFavoriteFixture } from "store/features/fixtures/fixturesSlice";
 import { useAppSelector, useAppDispatch } from "store/hooks";
 import { toggleDialog } from "@/app/store/features/dialog/dialogSlice";
 import Statistics from "components/custom/statistics/statistics";
+import { getExampleStatistics } from "./example";
 
 
 export default function DirettaRow(fixture: FavoriteFixture) {
@@ -21,26 +22,24 @@ export default function DirettaRow(fixture: FavoriteFixture) {
   };
 
   const onClickRow = async () => {
-    const fixtureInfo = await fetch(`/api/api-football/statistics/?fixture=${fixture.fixture.id}&team1=${fixture.teams.home.id}&team2=${fixture.teams.away.id}`)
+   /* const fixtureInfo = await fetch(`/api/api-football/statistics/?fixture=${fixture.fixture.id}&team1=${fixture.teams.home.id}&team2=${fixture.teams.away.id}`)
     .then(r => r.json())
     console.log('fixture info: ', fixtureInfo);
     const [aStats, bStats] = fixtureInfo.map((x: any) => x.response[0]);
     // if both teams have statistics for the fixture, then show the statistics
    if(Math.min(aStats.statistics.length, bStats.statistics.length) > 0) {
-    console.log('statistics: ', aStats.statistics, bStats.statistics);
-
+    // logica per mostrare le statistiche
+   }*/
     dispatch(toggleDialog({
       content: {
         header: <div>
-          <h1>Statistics</h1>
+          <h1>Statistics (valori random perché erano finite le chiamate API)</h1>
         </div>,
         body: <div>
-          <Statistics statisticsA={aStats.statistics} statisticsB={bStats.statistics} />   
+          <Statistics statisticsA={getExampleStatistics()} statisticsB={getExampleStatistics()} />   
         </div>
       }
     }))
-
-   }
   }
 
   return (
@@ -95,3 +94,4 @@ export default function DirettaRow(fixture: FavoriteFixture) {
     </div>
   );
 }
+
