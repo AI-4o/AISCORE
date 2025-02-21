@@ -14,7 +14,7 @@
       "utils": ["app/lib/utils"],
       "actions": ["app/lib/actions"],
       "appConfig": ["app/appConfig"],
-      "store": ["app/store"],
+      "store/*": ["app/store/*"],
       "api/*": ["app/api/*"]
     },
     "strict": true,

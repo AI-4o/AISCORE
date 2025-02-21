@@ -9,7 +9,7 @@ import mockFixtures from "api/api-football/mock-responses/mock-fixtures/mock-fix
 import { getAPIFootballParams } from "@/app/api/api-football/api-call.defs";
 import { config } from "appConfig";
 import qs from "qs";
-import { compareDates, formatDateToYYYYMMDD } from "@/app/lib/utils";
+import { compareDates } from "@/app/lib/utils";
 
 export interface FootballState {
   fixtures: FavoriteFixture[];

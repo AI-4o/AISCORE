@@ -20,6 +20,8 @@ export function Shell({
   rightSideChild,
   footer,
 }: ShellProps) {
+  
+  
   return (
     <div className="page-wrapper">
       <div

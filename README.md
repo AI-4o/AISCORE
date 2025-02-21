@@ -1,7 +1,6 @@
 ## TODO
 - [ ] tabella dirette
       - [] !!! dare priorità: prima assoluta coppa italia, champions league, europa league
-      - [] !!! se una lega non ha l’immagine, non mostrare l’immagine
 - [ ] !! studio api
 - [ ] partita live →
       - [] !! vedere tempo che passa
@@ -18,9 +17,22 @@
       - [] statistiche
 - [] login registrazione in una modale
 - [] vedere tutorial [bunny.net](https://bunny.net) per conservare loghi e immaginate
-- [] ! pagina calciatore
+- [] !pagina calciatore
 
 ## Problemi api-score
 
 - alcuni giorni (es domenica 09/02) no fixtures, mentre su diretta ci sono
 - no commenti live
+
+https://apiv3.apifootball.com/?action=get_leagues&country_id=6&APIkey=xxxxxxxxxxxxxx
+
+
+
+
+ip address: 151.35.210.71
+
+primary key/primary token: 57fd0855-ea2b-43cf-9cbc-4d5cb0b24c33
+
+secondary key: 83928bb3-435f-4d6a-b3f8-65dacac6db29
+
+

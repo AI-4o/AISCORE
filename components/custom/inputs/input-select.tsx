@@ -73,7 +73,6 @@ export default function InputSelect({
                                     const currentIndex = options.findIndex(
                                         (opt) => opt.name === selectedOpt?.name,
                                     );
-                                    console.log("currentIndex: ", selectedOpt, selectedOpt?.name, currentIndex, "options: ", options, options[currentIndex - 1])
                                     if (currentIndex > 0) {
                                         handleSelect(options[currentIndex - 1]);
                                     }

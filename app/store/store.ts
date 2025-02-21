@@ -1,7 +1,7 @@
 import type { Action, ThunkAction } from "@reduxjs/toolkit"
 import { configureStore } from "@reduxjs/toolkit"
 import footballReducer from "../store/features/fixtures/fixturesSlice"
-import spinnerReducer from "../store/features/spinner/spinnerSlice"
+import spinnerReducer from "./features/dialog/dialogSlice"
 
 /**
 ON CREATING A STORE

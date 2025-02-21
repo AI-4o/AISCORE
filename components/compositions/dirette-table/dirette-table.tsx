@@ -16,16 +16,13 @@ import {
   toggleFavoriteLeague,
 } from "store/features/fixtures/fixturesSlice";
 import { useEffect, useState } from "react";
-import Spinner from "components/custom/spinner/spinner";
-import {
-  setIsActiveSpinner,
-  setIsInactiveSpinner,
-} from "store/features/spinner/spinnerSlice";
+import { toggleSpinner } from "@/app/store/features/dialog/dialogSlice";
 import { config } from "appConfig";
 import Image from "next/image";
 import DiretteToolbar from "../dirette-toolbar/dirette-toolbar";
 import { getAPIFootballParams } from "api/api-football/api-call.defs";
 import PreferitiIcon from "components/custom/preferiti-icon/preferiti-icon";
+import { DiretteTableSkeleton } from "../dirette-table-skeleton/skeleton";
 
 export function DiretteTable(p: getAPIFootballParams) {
   const dispatch = useAppDispatch();
@@ -45,7 +42,7 @@ export function DiretteTable(p: getAPIFootballParams) {
       ? openAccordionsVls.filter((vl) => vl !== accordionVl)
       : [...openAccordionsVls, accordionVl];
     setOpenAccordionsVls(values);
-  }; 
+  };
 
   // get the leagueFixtures of the day, filtered also by favorite if showFavorites is true
   const leagueFixturesOfDay = useAppSelector((state) => {
@@ -53,21 +50,18 @@ export function DiretteTable(p: getAPIFootballParams) {
     if (showFavorites) return getFavouriteLeagueFixtures(lfs);
     return lfs;
   });
+  const isNotActiveSpinner = useAppSelector((state) => !state.spinner.isActive && state.spinner.isSpinner);
+  const isActiveSpinner = useAppSelector((state) => state.spinner.isActive && state.spinner.isSpinner);
   const leagueFixtures = useAppSelector((state) => state.football.leaguesFixtures);
   const fixtures = useAppSelector((state) => state.football.fixtures);
 
   useEffect(() => {
-    dispatch(setIsActiveSpinner());
+    dispatch(toggleSpinner({ isSpinner: true }));
     dispatch(fetchFixtures(p));
     return () => {
-      dispatch(setIsInactiveSpinner());
+      dispatch(toggleSpinner({ }));
     };
   }, []);
-
-  useEffect(() => {
-    // Disable spinner when dirette changes
-    dispatch(setIsInactiveSpinner());
-  }, [leagueFixturesOfDay, dispatch]);
 
   // DEBUG
   useEffect(() => {
@@ -79,11 +73,11 @@ export function DiretteTable(p: getAPIFootballParams) {
 
   return (
     <div className="dirette-table w-full bg-secondary-football">
-      <Spinner src={config.spinner}>
         <DiretteToolbar
           onDateChange={(e) => setDayToShow(new Date(e.target.value))}
           onShowFavoritesChange={(e) => setShowFavorites(e)}
         />
+        {isActiveSpinner && <DiretteTableSkeleton />}
         <div className="dirette-table-content">
           <Accordion
             type="multiple"
@@ -91,7 +85,7 @@ export function DiretteTable(p: getAPIFootballParams) {
             value={openAccordionsVls}
           >
             {/* caso in cui non ci sono partite nel tale gg*/}
-            {leagueFixturesOfDay.length === 0 && !showFavorites && (
+            {leagueFixturesOfDay.length === 0 && !showFavorites && isNotActiveSpinner && (
               <div className="dirette-table-no-fixtures flex flex-col items-center justify-center gap-4 py-12 px-4">
                 <h2 className="text-2xl font-bold">Non ci sono partite oggi 🥲</h2>
               </div>
@@ -106,7 +100,6 @@ export function DiretteTable(p: getAPIFootballParams) {
             {/* caso in cui ci sono partite */}
             {leagueFixturesOfDay.length > 0 &&
               leagueFixturesOfDay
-                .slice(0, config.pagination)
                 .map((fxt, index) => {
                   return (
                     <AccordionItem
@@ -123,7 +116,7 @@ export function DiretteTable(p: getAPIFootballParams) {
                         />
                         <AccordionTrigger
                           className="dirette-table-accordion-trigger"
-                          onClick={() => toggleAccordion(index) }
+                          onClick={() => toggleAccordion(index)}
                         >
                           <div className="flex items-center gap-4">
                             <Image
@@ -152,7 +145,6 @@ export function DiretteTable(p: getAPIFootballParams) {
                 })}
           </Accordion>
         </div>
-      </Spinner>
     </div>
   );
 }

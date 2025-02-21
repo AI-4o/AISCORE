@@ -6,7 +6,8 @@ import Image from "next/image";
 import "./globals.css";
 import { config } from "appConfig";
 import Footer from "components/custom/footer/footer";
-import StoreProvider from "./context/store-provider/store-provider";
+import StoreProvider from "./providers/store-provider/store-provider";
+import DialogProvider from "components/custom/dialog-provider/dialog-provider";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -44,13 +45,14 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <Shell
-              navbarItems={config.navLinks}
-              banner={banner}
-              sfondoPath={config.sfondo}
-              mainChild={children}
-              footer={footer}
-            />
+            <DialogProvider />
+              <Shell
+                navbarItems={config.navLinks}
+                banner={banner}
+                sfondoPath={config.sfondo}
+                mainChild={children}
+                footer={footer}
+              />
           </ThemeProvider>
         </StoreProvider>
       </body>

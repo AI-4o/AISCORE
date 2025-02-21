@@ -5,4 +5,4 @@ globs: *.tsx
 
 # Your rule content
 
-- the styles used in the app are listed in [globals.css](mdc:app/globals.css) and in [tailwind.config.ts](mdc:tailwind.config.ts)
+- the styles used in the app are listed in [globals.css](mdc:app/globals.css) and in [tailwind.config.ts](mdc:tailwind.config.ts), the style of the elements should be made using the classes and styles described in those files.

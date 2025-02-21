@@ -19,4 +19,4 @@
   .spinner-sibling-content.disabled, .lottie-container.disabled {
     pointer-events: none; /* Disabilita l'interazione */
     opacity: 0.5; /* Riduce l'opacità */
-  }
+  }<
