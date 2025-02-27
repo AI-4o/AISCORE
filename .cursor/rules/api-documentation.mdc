@@ -1,0 +1,9 @@
+---
+description: the documentation of the api used to get the football data for the app
+globs: *.ts, *.tsx
+alwaysApply: false
+---
+when you have to make a call to the api api-football (e.g. when writing a route or a storte slice)
+make sure you follow the documentation of the api, which is in:
+
+https://www.api-football.com/documentation-v3

@@ -1,66 +1,66 @@
 const exampleStatisticsA = [
   {
-    type: "Shots on Goal",
+    type: "Tiri in Porta",
     value: 3,
   },
   {
-    type: "Shots off Goal",
+    type: "Tiri Fuori",
     value: 2,
   },
   {
-    type: "Total Shots",
+    type: "Tiri Totali",
     value: 9,
   },
   {
-    type: "Blocked Shots",
+    type: "Tiri Bloccati",
     value: 4,
   },
   {
-    type: "Shots insidebox",
+    type: "Tiri in Area",
     value: 4,
   },
   {
-    type: "Shots outsidebox",
+    type: "Tiri da Fuori Area",
     value: 5,
   },
   {
-    type: "Fouls",
+    type: "Falli",
     value: 22,
   },
   {
-    type: "Corner Kicks",
+    type: "Calci d'Angolo",
     value: 3,
   },
   {
-    type: "Offsides",
+    type: "Fuorigioco",
     value: 1,
   },
   {
-    type: "Ball Possession",
+    type: "Possesso Palla",
     value: "32%",
   },
   {
-    type: "Yellow Cards",
+    type: "Cartellini Gialli",
     value: 5,
   },
   {
-    type: "Red Cards",
+    type: "Cartellini Rossi",
     value: 1,
   },
   {
-    type: "Goalkeeper Saves",
+    type: "Parate del Portiere",
     value: null,
   },
   {
-    type: "Total passes",
+    type: "Passaggi Totali",
     value: 242,
   },
   {
-    type: "Passes accurate",
+    type: "Passaggi Riusciti",
     value: 121,
   },
   {
-    type: "Passes %",
+    type: "Percentuale Passaggi",
     value: null,
   },
 ];

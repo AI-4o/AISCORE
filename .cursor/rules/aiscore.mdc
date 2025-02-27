@@ -1,0 +1,149 @@
+---
+description: struttura dell'app
+globs: 
+alwaysApply: true
+---
+{
+  "appStructure": {
+    "description": "Struttura dell'applicazione AiScore, descrizione dei principali componenti e loro funzionalità",
+    "version": "1.0.0",
+    "directoryStructure": {
+      "app": {
+        "description": "Directory principale dell'applicazione Next.js",
+        "subDirectories": {
+          "api": {
+            "description": "Layer API dell'applicazione",
+            "subDirectories": {
+              "api-football": {
+                "description": "API per dati calcistici",
+                "subDirectories": {
+                  "actions": {
+                    "description": "Azioni server per interazioni con l'API esterna",
+                    "files": {
+                      "actions.ts": "Definizioni delle server actions per interagire con l'API calcistica"
+                    }
+                  },
+                  "get-fixtures": {
+                    "description": "API endpoints per il recupero delle partite"
+                  },
+                  "get-api": {
+                    "description": "Funzionalità di base per chiamate API"
+                  },
+                  "models": {
+                    "description": "Definizioni dei tipi e modelli di dati per l'API calcistica"
+                  },
+                  "mock-responses": {
+                    "description": "Risposte simulate per testing e sviluppo"
+                  },
+                  "statistics": {
+                    "description": "API per statistiche delle partite"
+                  }
+                },
+                "files": {
+                  "api-call.defs.ts": "Definizioni per le chiamate API"
+                }
+              },
+              "auth": {
+                "description": "API per l'autenticazione utenti"
+              }
+            }
+          },
+          "store": {
+            "description": "Redux store dell'applicazione",
+            "files": {
+              "store.ts": "Configurazione principale di Redux store",
+              "hooks.ts": "Hook personalizzati per useDispatch e useSelector"
+            },
+            "subDirectories": {
+              "features": {
+                "description": "Feature slice di Redux",
+                "subDirectories": {
+                  "fixtures": {
+                    "description": "Gestione delle partite calcistiche",
+                    "files": {
+                      "fixturesSlice.ts": "Slice Redux per la gestione delle partite, compresi reducers, actions e thunks"
+                    }
+                  },
+                  "dialog": {
+                    "description": "Gestione degli spinner e dei dialog dell'interfaccia"
+                  }
+                }
+              }
+            }
+          },
+          "lib": {
+            "description": "Utility e funzioni di supporto"
+          },
+          "providers": {
+            "description": "Provider per contesti React e Redux"
+          },
+          "protected": {
+            "description": "Route protette che richiedono autenticazione"
+          },
+          "auth": {
+            "description": "Componenti e logica per l'autenticazione"
+          },
+          "diretta": {
+            "description": "Componenti per la visualizzazione in diretta delle partite"
+          },
+          "changelog": {
+            "description": "Pagina di changelog dell'applicazione"
+          }
+        },
+        "files": {
+          "layout.tsx": "Layout principale dell'applicazione",
+          "page.tsx": "Pagina principale dell'applicazione",
+          "appConfig.tsx": "Configurazione globale dell'applicazione",
+          "auth.ts": "Configurazione del sistema di autenticazione",
+          "auth.config.ts": "Impostazioni specifiche per l'autenticazione",
+          "globals.css": "Stili CSS globali",
+          "form.tsx": "Componente di form riutilizzabile",
+          "submit-button.tsx": "Componente pulsante di submit personalizzato"
+        }
+      }
+    },
+    "keyComponents": {
+      "reduxStore": {
+        "description": "Il Redux store è configurato in app/store/store.ts e utilizza le feature slice in app/store/features/",
+        "slices": {
+          "fixtures": {
+            "description": "Gestisce lo stato delle partite calcistiche, compresi preferiti e organizzazione per leghe",
+            "state": {
+              "fixtures": "Array di FavoriteFixture, rappresenta le partite",
+              "leagues": "Array di FavoriteLeague, rappresenta le leghe",
+              "leaguesFixtures": "Array di FavoriteLeagueFixture, associa leghe e relative partite",
+              "status": "Stato del caricamento (idle, loading, failed)"
+            },
+            "actions": {
+              "toggleFavoriteFixture": "Attiva/disattiva lo stato preferito di una partita",
+              "toggleFavoriteLeague": "Attiva/disattiva lo stato preferito di una lega"
+            },
+            "selectors": {
+              "selectLeagueFixturesByDay": "Seleziona le partite di una lega per un giorno specifico",
+              "getFavouriteLeagueFixtures": "Ottiene le leghe e partite preferite"
+            }
+          },
+          "spinner": {
+            "description": "Gestisce lo stato di caricamento e dialoghi dell'interfaccia utente"
+          }
+        }
+      },
+      "apiLayer": {
+        "description": "Layer API dell'applicazione, gestisce le chiamate a servizi esterni",
+        "endpoints": {
+          "fixtures": "Recupera le partite di calcio",
+          "statistics": "Recupera statistiche di partite"
+        },
+        "serverActions": {
+          "writeMockResponse": "Scrive risposte simulate per il testing"
+        }
+      }
+    },
+    "bestPractices": {
+      "stili": "Gli stili utilizzati nell'app sono definiti in app/globals.css e tailwind.config.ts",
+      "apiCalls": "Le chiamate API sono gestite tramite server actions in app/api",
+      "reduxUsage": "Utilizza i custom hooks da app/store/hooks.ts (useAppDispatch, useAppSelector) per interagire con Redux",
+      "routing": "Segue la struttura di routing di Next.js con directory per le route"
+    }
+  }
+}

@@ -10,6 +10,8 @@ const redis = new Redis({
   token: 'AcRDAAIjcDE0Y2U3NTM1MTU1MmE0ZDlkOGM0MzRkMGU4ZjI2YjcyYXAxMA',
 })
 
+
+
 /**
  * Write API Football response to mock file
  * @param data - The response data from API Football
@@ -40,6 +42,3 @@ export const writeMockResponse = async (
     console.error("Error writing mock response:", error);
   }
 };
-
-
-

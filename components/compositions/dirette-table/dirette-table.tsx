@@ -15,7 +15,7 @@ import {
   selectLeagueFixturesByDay,
   toggleFavoriteLeague,
 } from "store/features/fixtures/fixturesSlice";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { toggleDialog } from "@/app/store/features/dialog/dialogSlice";
 import { config } from "appConfig";
 import Image from "next/image";
@@ -46,7 +46,7 @@ export function DiretteTable(p: getAPIFootballParams) {
 
   // get the leagueFixtures of the day, filtered also by favorite if showFavorites is true
   const leagueFixturesOfDay = useAppSelector((state) => {
-    const lfs = selectLeagueFixturesByDay(state.football, dayToShow);
+    const lfs = selectLeagueFixturesByDay(state, dayToShow);
     if (showFavorites) return getFavouriteLeagueFixtures(lfs);
     return lfs;
   });

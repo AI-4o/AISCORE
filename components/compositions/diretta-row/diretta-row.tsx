@@ -6,10 +6,12 @@ import Image from "next/image";
 import PreferitiIcon from "components/custom/preferiti-icon/preferiti-icon";
 import { formatDateToHHmm } from "app/lib/utils";
 import { toggleFavoriteFixture } from "store/features/fixtures/fixturesSlice";
-import { useAppSelector, useAppDispatch } from "store/hooks";
+import { useAppDispatch, useAppSelector } from "store/hooks";
 import { toggleDialog } from "@/app/store/features/dialog/dialogSlice";
 import Statistics from "components/custom/statistics/statistics";
 import { getExampleStatistics } from "./example";
+import { useEffect } from "react";
+import { fetchPlayersData } from "@/app/store/features/players/playersSlice";
 
 
 export default function DirettaRow(fixture: FavoriteFixture) {
@@ -24,7 +26,7 @@ export default function DirettaRow(fixture: FavoriteFixture) {
   const onClickRow = async () => {
    /* const fixtureInfo = await fetch(`/api/api-football/statistics/?fixture=${fixture.fixture.id}&team1=${fixture.teams.home.id}&team2=${fixture.teams.away.id}`)
     .then(r => r.json())
-    console.log('fixture info: ', fixtureInfo);
+    // console.log('fixture info: ', fixtureInfo);
     const [aStats, bStats] = fixtureInfo.map((x: any) => x.response[0]);
     // if both teams have statistics for the fixture, then show the statistics
    if(Math.min(aStats.statistics.length, bStats.statistics.length) > 0) {
@@ -33,7 +35,7 @@ export default function DirettaRow(fixture: FavoriteFixture) {
     dispatch(toggleDialog({
       content: {
         header: <div>
-          <h1>Statistics (valori random perché erano finite le chiamate API)</h1>
+          <h1>Statistics (valori random finite chiamate API 💸)</h1>
         </div>,
         body: <div>
           <Statistics statisticsA={getExampleStatistics()} statisticsB={getExampleStatistics()} />   
@@ -41,6 +43,11 @@ export default function DirettaRow(fixture: FavoriteFixture) {
       }
     }))
   }
+
+  useEffect(() => {
+    //dispatch(fetchPlayersData(fixture.teams.home.id));
+    //dispatch(fetchPlayersData(fixture.teams.away.id));
+  }, []);
 
   return (
     <div

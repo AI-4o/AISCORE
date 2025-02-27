@@ -43,7 +43,7 @@ export async function authenticate(
   formData: FormData
 ) {
   try {
-    ////console.log(prevState);
+    ////// console.log(prevState);
     await signIn("credentials", formData);
   } catch (error) {
     if (error instanceof AuthError) {
