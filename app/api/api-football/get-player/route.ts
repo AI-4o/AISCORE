@@ -24,33 +24,35 @@ export async function GET(request: NextRequest) {
         
         // Prova a recuperare i dati dalla cache, altrimenti chiama l'API
         const playerInfoPromise = getOrSet(`player:${playerId}`, async () => {
-            const res = await ofetch(playerInfoUrl).then(r => r.json()) as PlayerResponse;
+            const res = await ofetch<PlayerResponse>(playerInfoUrl);
             
             // Salva il player nella cache
-            if (res.response && res.response.length > 0 && res.response[0].player) {
-                await savePlayer(res.response[0].player);
+            if (res.response && res.response.length > 0 && res.response.player) {
+                await savePlayer(res.response.player);
             }
             
             return res;
         }, 86400 * 7); // 7 giorni di cache
-        
+
         const playerStatsPromise = getOrSet(`player:stats:${playerId}:${season}`, async () => {
-            const res = await ofetch(playerStatsUrl).then(r => r.json()) as PlayerStatisticsResponse;
+            const res = await ofetch<PlayerStatisticsResponse>(playerStatsUrl);
             
             // Salva le statistiche nella cache
             if (res.response && res.response.length > 0) {
-                await savePlayerStatistics(playerId, res.response[0], season);
+                await savePlayerStatistics(playerId, res.response, season);
             }
             
             return res;
         }, 86400); // 1 giorno di cache
+
+
         
         const playerTransfersPromise = getOrSet(`player:transfers:${playerId}`, async () => {
-            const res = await ofetch(playerTransfersUrl).then(r => r.json()) as PlayerTransferResponse;
+            const res = await ofetch<PlayerTransferResponse>(playerTransfersUrl);
             
             // Salva i trasferimenti nella cache
             if (res.response && res.response.length > 0) {
-                await savePlayerTransfers(playerId, res.response[0]);
+                await savePlayerTransfers(playerId, res.response);
             }
             
             return res;

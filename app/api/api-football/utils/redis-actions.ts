@@ -254,7 +254,8 @@ export async function invalidateCache(key: string): Promise<void> {
 }
 
 /**
- * Ottiene una chiave dalla cache o esegue una funzione per ottenerla
+ * Data una chiave, se è presente in cache, la restituisce, altrimenti la recupera dall'api remota con la fetchFunction,
+ *  la salva in cache e la ritorna.
  * @param key - La chiave da cercare in cache
  * @param fetchFunction - La funzione da eseguire se la chiave non è in cache
  * @param ttl - Il tempo di vita in secondi

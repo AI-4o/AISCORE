@@ -52,7 +52,7 @@ export const config = {
     { title: "REGISTRAZIONE", href: "/auth/register" },
   ],
 
-  pagination: 30,
+  pagination: 10,
   changeLog: [
     {
       version: "1.0.0",

@@ -11,11 +11,12 @@ import DirettaRow from "../diretta-row/diretta-row";
 import { useAppSelector, useAppDispatch } from "store/hooks";
 import {
   fetchFixtures,
-  getFavouriteLeagueFixtures,
-  selectLeagueFixturesByDay,
+  sFavoriteLeaguesFixtures,
+  sFavoriteLeaguesFixturesByDay,
+  sLeagueFixturesByDay,
   toggleFavoriteLeague,
-} from "store/features/fixtures/fixturesSlice";
-import { useEffect, useState, useMemo } from "react";
+} from "@/app/store/features/fixtures/footballSlice";
+import { useEffect, useState } from "react";
 import { toggleDialog } from "@/app/store/features/dialog/dialogSlice";
 import { config } from "appConfig";
 import Image from "next/image";
@@ -45,19 +46,18 @@ export function DiretteTable(p: getAPIFootballParams) {
   };
 
   // get the leagueFixtures of the day, filtered also by favorite if showFavorites is true
-  const leagueFixturesOfDay = useAppSelector((state) => {
-    const lfs = selectLeagueFixturesByDay(state, dayToShow);
-    if (showFavorites) return getFavouriteLeagueFixtures(lfs);
+  const leagueFixturesOfDay = useAppSelector((s) => {
+    const lfs = sLeagueFixturesByDay(s, dayToShow);
+    if (showFavorites) return sFavoriteLeaguesFixturesByDay(s, dayToShow)  ;
     return lfs;
   });
   const isNotActiveSpinner = useAppSelector((state) => !state.spinner.isActive && state.spinner.isSpinner);
   const isActiveSpinner = useAppSelector((state) => state.spinner.isActive && state.spinner.isSpinner);
   const leagueFixtures = useAppSelector((state) => state.football.leaguesFixtures);
-  const fixtures = useAppSelector((state) => state.football.fixtures);
 
   useEffect(() => {
     dispatch(toggleDialog({ isSpinner: true }));
-    dispatch(fetchFixtures(p));
+    dispatch(fetchFixtures());
     return () => {
       dispatch(toggleDialog({ }));
     };
@@ -67,9 +67,8 @@ export function DiretteTable(p: getAPIFootballParams) {
   useEffect(() => {
     (window as any).leagueFixturesOfDay = leagueFixturesOfDay;
     (window as any).leagueFixtures = leagueFixtures;
-    (window as any).fixtures = fixtures;
 
-  }, [leagueFixturesOfDay, dayToShow, leagueFixtures, fixtures]);
+  }, [leagueFixturesOfDay, dayToShow, leagueFixtures]);
 
   return (
     <div className="dirette-table w-full bg-secondary-football">

@@ -5,7 +5,7 @@ import { config } from "appConfig";
 import Image from "next/image";
 import PreferitiIcon from "components/custom/preferiti-icon/preferiti-icon";
 import { formatDateToHHmm } from "app/lib/utils";
-import { toggleFavoriteFixture } from "store/features/fixtures/fixturesSlice";
+import { toggleFavoriteFixture } from "@/app/store/features/fixtures/footballSlice";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 import { toggleDialog } from "@/app/store/features/dialog/dialogSlice";
 import Statistics from "components/custom/statistics/statistics";

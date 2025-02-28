@@ -1,6 +1,6 @@
 import type { Action, ThunkAction } from "@reduxjs/toolkit"
 import { configureStore } from "@reduxjs/toolkit"
-import footballReducer from "../store/features/fixtures/fixturesSlice"
+import footballReducer from "./features/fixtures/footballSlice"
 import spinnerReducer from "./features/dialog/dialogSlice"
 import playersReducer from "./features/players/playersSlice"
 
@@ -14,9 +14,9 @@ state.counter section whenever an action is dispatched.
 export const store = configureStore({
   reducer: {
     football: footballReducer,
-    spinner: spinnerReducer,
-    players: playersReducer
+    spinner: spinnerReducer
   },
+  devTools: true,
 })
 
 // Infer the type of `store`

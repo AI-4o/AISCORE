@@ -47,5 +47,4 @@ export const spinnerSlice = createSlice({
 });
 
 export default spinnerSlice.reducer;
-export const { toggleDialog } =
-  spinnerSlice.actions;
+export const { toggleDialog } = spinnerSlice.actions;

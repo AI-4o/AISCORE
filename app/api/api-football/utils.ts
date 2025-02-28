@@ -1,5 +1,3 @@
-
-
 // utility to make calls to the api-football api with the correct headers including the api key
 
 import { writeFile } from "fs/promises";
@@ -17,9 +15,24 @@ const requestOptions: RequestInit = {
   redirect: "follow" as RequestRedirect, // Explicitly cast to RequestRedirect
 };
 
-export const ofetch = (url: string) => {
-    return fetch(url, requestOptions)
-}
+// example of overloading of the ofetch function
+export function ofetch<T = any>(url: string): Promise<T>;
+export function ofetch<T = any>(...urls: string[]): Promise<T[]>;
+// implementation
+/**
+ * Fetch using the api-football api key, distinguish the case of a single url or multiple urls
+ * @param urls 
+ * @returns an array of the fetched data or a single object based on whether one or multiple urls are provided
+ */
+export async function ofetch<T = any>(...urls: string[]): Promise<T | T[]> {
+  const promises = await Promise.all(urls.map(u => {
+    return fetch(u, requestOptions)
+  }));
+  
+  const results = await Promise.all(promises.map(p => p.json()));
+  
+  return urls.length === 1 ? results[0] as T : results as T[];
+} 
 
 export const writeJSON = async (data: any, filePath: string) => {
   try {
