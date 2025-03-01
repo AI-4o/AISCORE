@@ -1,5 +1,3 @@
-
-
 import { NextRequest, NextResponse } from 'next/server';
 import { PlayerResponse, PlayerStatisticsResponse, PlayerTransferResponse } from '../models/footballModels';
 import { ofetch } from '../utils';
@@ -19,7 +17,7 @@ export async function GET(request: NextRequest) {
         const season = params.season ? parseInt(params.season) : new Date().getFullYear();
     } catch (error) {
         console.error('Error in get-player route:', error);
-        return NextResponse.json({ error: 'Server error' }, { status: 500 });
+        return NextResponse.json({ error: 'Server error' + (error as Error).message }, { status: 500 });
     }
 }
 /*
@@ -84,6 +82,6 @@ export async function GET(request: NextRequest) {
         return NextResponse.json(combinedData, { status: 200 });
     } catch (error) {
         console.error('Error in get-player route:', error);
-        return NextResponse.json({ error: 'Server error' }, { status: 500 });
+        return NextResponse.json({ error: 'Server error' + (error as Error).message }, { status: 500 });
     }
 } */

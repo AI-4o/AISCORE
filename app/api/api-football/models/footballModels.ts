@@ -279,3 +279,49 @@ export interface PlayerTransferResponse {
   };
   response: Array<PlayerTransfer>;
 }
+
+export interface LineupResponse {
+  get: string;
+  parameters: {
+    fixture: string;
+  };
+  errors: any[];
+  results: number;
+  paging: {
+    current: number;
+    total: number;
+  };
+  response: Lineup[];
+}
+
+export interface Lineup {
+  team: {
+    id?: number;
+    name?: string;
+    logo?: string;
+  };
+  formation: string;
+  startXI: Array<{
+    player: {
+      id: number;
+      name: string;
+      number: number;
+      pos: string;
+      grid?: string;
+    };
+  }>;
+  substitutes: Array<{
+    player: {
+      id: number;
+      name: string;
+      number: number;
+      pos: string;
+      grid?: string;
+    };
+  }>;
+  coach: {
+    id?: number;
+    name?: string;
+    photo?: string;
+  };
+}

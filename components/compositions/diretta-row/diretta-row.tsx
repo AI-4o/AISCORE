@@ -25,6 +25,7 @@ import Statistics from "components/custom/statistics/statistics";
 import { getExampleStatistics } from "./example";
 import MultiView, { View } from "../multi-view/multi-view";
 import Banner from "../diretta-banner/banner";
+import Formations from "../formations/formations";
 
 export default function DirettaRow(fixture: FavoriteFixture) {
   const dispatch = useAppDispatch();
@@ -52,7 +53,7 @@ export default function DirettaRow(fixture: FavoriteFixture) {
       {
         name: "Formazioni",
         id: "formations",
-        body: <div>inserire componente di formazioni</div>,
+        body: <Formations fixture={fixture} />,
       },
       {
         name: "Commento",

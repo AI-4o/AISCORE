@@ -33,7 +33,7 @@ export async function GET(r: NextRequest) {
         return NextResponse.json(responseJson, { status: 200 })
     } catch (error) {
         console.error('Errore nella route get-api:', error);
-        return NextResponse.json({ error: 'Errore nel server' }, { status: 500 });
+        return NextResponse.json({ error: 'Errore nel server' + (error as Error).message }, { status: 500 });
         }
 }
 

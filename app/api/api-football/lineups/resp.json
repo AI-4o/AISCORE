@@ -1,0 +1,484 @@
+{
+  "get": "fixtures/lineups",
+  "parameters": {
+    "fixture": "1223857"
+  },
+  "errors": [],
+  "results": 2,
+  "paging": {
+    "current": 1,
+    "total": 1
+  },
+  "response": [
+    {
+      "team": {
+        "id": 502,
+        "name": "Fiorentina",
+        "logo": "https://media.api-sports.io/football/teams/502.png",
+        "colors": {
+          "player": {
+            "primary": "693586",
+            "number": "fffdff",
+            "border": "693586"
+          },
+          "goalkeeper": {
+            "primary": "f5ef61",
+            "number": "5e3269",
+            "border": "f5ef61"
+          }
+        }
+      },
+      "formation": "3-5-2",
+      "startXI": [
+        {
+          "player": {
+            "id": 882,
+            "name": "David De Gea",
+            "number": 43,
+            "pos": "G",
+            "grid": "1:1"
+          }
+        },
+        {
+          "player": {
+            "id": 1084,
+            "name": "Marin Pongračić",
+            "number": 5,
+            "pos": "D",
+            "grid": "2:3"
+          }
+        },
+        {
+          "player": {
+            "id": 46792,
+            "name": "Pablo Marí",
+            "number": 18,
+            "pos": "D",
+            "grid": "2:2"
+          }
+        },
+        {
+          "player": {
+            "id": 31642,
+            "name": "Luca Ranieri",
+            "number": 6,
+            "pos": "D",
+            "grid": "2:1"
+          }
+        },
+        {
+          "player": {
+            "id": 41144,
+            "name": "Dodô",
+            "number": 2,
+            "pos": "M",
+            "grid": "3:5"
+          }
+        },
+        {
+          "player": {
+            "id": 311083,
+            "name": "Cher Ndour",
+            "number": 27,
+            "pos": "M",
+            "grid": "3:4"
+          }
+        },
+        {
+          "player": {
+            "id": 1852,
+            "name": "Danilo Cataldi",
+            "number": 32,
+            "pos": "M",
+            "grid": "3:3"
+          }
+        },
+        {
+          "player": {
+            "id": 30810,
+            "name": "Rolando Mandragora",
+            "number": 8,
+            "pos": "M",
+            "grid": "3:2"
+          }
+        },
+        {
+          "player": {
+            "id": 30422,
+            "name": "Robin Gosens",
+            "number": 21,
+            "pos": "M",
+            "grid": "3:1"
+          }
+        },
+        {
+          "player": {
+            "id": 786,
+            "name": "Nicolò Zaniolo",
+            "number": 17,
+            "pos": "F",
+            "grid": "4:2"
+          }
+        },
+        {
+          "player": {
+            "id": 6010,
+            "name": "Lucas Beltrán",
+            "number": 9,
+            "pos": "F",
+            "grid": "4:1"
+          }
+        }
+      ],
+      "substitutes": [
+        {
+          "player": {
+            "id": 876,
+            "name": "Nicolò Fagioli",
+            "number": 44,
+            "pos": "M",
+            "grid": null
+          }
+        },
+        {
+          "player": {
+            "id": 396637,
+            "name": "Pietro Comuzzo",
+            "number": 15,
+            "pos": "D",
+            "grid": null
+          }
+        },
+        {
+          "player": {
+            "id": 421807,
+            "name": "Matias Moreno",
+            "number": 22,
+            "pos": "D",
+            "grid": null
+          }
+        },
+        {
+          "player": {
+            "id": 2799,
+            "name": "Albert Guðmundsson",
+            "number": 10,
+            "pos": "F",
+            "grid": null
+          }
+        },
+        {
+          "player": {
+            "id": 383267,
+            "name": "Tommaso Martinelli",
+            "number": 30,
+            "pos": "G",
+            "grid": null
+          }
+        },
+        {
+          "player": {
+            "id": 30394,
+            "name": "Pietro Terracciano",
+            "number": 1,
+            "pos": "G",
+            "grid": null
+          }
+        },
+        {
+          "player": {
+            "id": 136087,
+            "name": "Fabiano Parisi",
+            "number": 65,
+            "pos": "D",
+            "grid": null
+          }
+        },
+        {
+          "player": {
+            "id": 437095,
+            "name": "Tommaso Rubino",
+            "number": 66,
+            "pos": "M",
+            "grid": null
+          }
+        },
+        {
+          "player": {
+            "id": 418334,
+            "name": "Maat Daniel Caprini",
+            "number": 63,
+            "pos": "F",
+            "grid": null
+          }
+        },
+        {
+          "player": {
+            "id": 403633,
+            "name": "Jonas Harder",
+            "number": 64,
+            "pos": "M",
+            "grid": null
+          }
+        }
+      ],
+      "coach": {
+        "id": null,
+        "name": null
+      }
+    },
+    {
+      "team": {
+        "id": 867,
+        "name": "Lecce",
+        "logo": "https://media.api-sports.io/football/teams/867.png",
+        "colors": {
+          "player": {
+            "primary": "ffffff",
+            "number": "000000",
+            "border": "ffffff"
+          },
+          "goalkeeper": {
+            "primary": "000000",
+            "number": "ffdd00",
+            "border": "000000"
+          }
+        }
+      },
+      "formation": "4-2-3-1",
+      "startXI": [
+        {
+          "player": {
+            "id": 56459,
+            "name": "Wladimiro Falcone",
+            "number": 30,
+            "pos": "G",
+            "grid": "1:1"
+          }
+        },
+        {
+          "player": {
+            "id": 21636,
+            "name": "Frédéric Guilbert",
+            "number": 12,
+            "pos": "D",
+            "grid": "2:4"
+          }
+        },
+        {
+          "player": {
+            "id": 127035,
+            "name": "Federico Baschirotto",
+            "number": 6,
+            "pos": "D",
+            "grid": "2:3"
+          }
+        },
+        {
+          "player": {
+            "id": 23253,
+            "name": "Gaby Jean",
+            "number": 19,
+            "pos": "D",
+            "grid": "2:2"
+          }
+        },
+        {
+          "player": {
+            "id": 31543,
+            "name": "Antonino Gallo",
+            "number": 25,
+            "pos": "D",
+            "grid": "2:1"
+          }
+        },
+        {
+          "player": {
+            "id": 1748,
+            "name": "Lassana Coulibaly",
+            "number": 29,
+            "pos": "M",
+            "grid": "3:2"
+          }
+        },
+        {
+          "player": {
+            "id": 190958,
+            "name": "Balthazar Pierret",
+            "number": 75,
+            "pos": "M",
+            "grid": "3:1"
+          }
+        },
+        {
+          "player": {
+            "id": 47182,
+            "name": "Tete Morente",
+            "number": 7,
+            "pos": "M",
+            "grid": "4:3"
+          }
+        },
+        {
+          "player": {
+            "id": 335071,
+            "name": "Medon Berisha",
+            "number": 5,
+            "pos": "M",
+            "grid": "4:2"
+          }
+        },
+        {
+          "player": {
+            "id": 48079,
+            "name": "Jesper Karlsson",
+            "number": 37,
+            "pos": "M",
+            "grid": "4:1"
+          }
+        },
+        {
+          "player": {
+            "id": 66817,
+            "name": "Nikola Krstović",
+            "number": 9,
+            "pos": "F",
+            "grid": "5:1"
+          }
+        }
+      ],
+      "substitutes": [
+        {
+          "player": {
+            "id": 56161,
+            "name": "Marco Sala",
+            "number": 99,
+            "pos": "D",
+            "grid": null
+          }
+        },
+        {
+          "player": {
+            "id": 28744,
+            "name": "Þórir Jóhann Helgason",
+            "number": 14,
+            "pos": "M",
+            "grid": null
+          }
+        },
+        {
+          "player": {
+            "id": 1831,
+            "name": "Ante Rebić",
+            "number": 3,
+            "pos": "F",
+            "grid": null
+          }
+        },
+        {
+          "player": {
+            "id": 161702,
+            "name": "Danilo Veiga",
+            "number": 17,
+            "pos": "D",
+            "grid": null
+          }
+        },
+        {
+          "player": {
+            "id": 495,
+            "name": "Christian Früchtl",
+            "number": 1,
+            "pos": "G",
+            "grid": null
+          }
+        },
+        {
+          "player": {
+            "id": 156619,
+            "name": "Jasper Samooja",
+            "number": 32,
+            "pos": "G",
+            "grid": null
+          }
+        },
+        {
+          "player": {
+            "id": 291589,
+            "name": "Kialonda Gaspar",
+            "number": 4,
+            "pos": "D",
+            "grid": null
+          }
+        },
+        {
+          "player": {
+            "id": 455316,
+            "name": "Tiago Gabriel",
+            "number": 44,
+            "pos": "D",
+            "grid": null
+          }
+        },
+        {
+          "player": {
+            "id": 136016,
+            "name": "Hamza Rafia",
+            "number": 8,
+            "pos": "M",
+            "grid": null
+          }
+        },
+        {
+          "player": {
+            "id": 15673,
+            "name": "Ylber Ramadani",
+            "number": 20,
+            "pos": "M",
+            "grid": null
+          }
+        },
+        {
+          "player": {
+            "id": 118956,
+            "name": "Lameck Banda",
+            "number": 22,
+            "pos": "M",
+            "grid": null
+          }
+        },
+        {
+          "player": {
+            "id": 197779,
+            "name": "Mohamed Kaba",
+            "number": 77,
+            "pos": "M",
+            "grid": null
+          }
+        },
+        {
+          "player": {
+            "id": 327763,
+            "name": "Rareș Burnete",
+            "number": 23,
+            "pos": "F",
+            "grid": null
+          }
+        },
+        {
+          "player": {
+            "id": 8643,
+            "name": "Konan N'Dri",
+            "number": 10,
+            "pos": "F",
+            "grid": null
+          }
+        }
+      ],
+      "coach": {
+        "id": null,
+        "name": null
+      }
+    }
+  ]
+}
