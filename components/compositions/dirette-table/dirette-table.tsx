@@ -86,8 +86,7 @@ export function DiretteTable() {
           onDateChange={(e) => setDayToShow(new Date(e.target.value))}
           onShowFavoritesChange={(e) => setShowFavorites(e)}
         />
-        {/* {isActiveSpinner && <DiretteTableSkeleton />} */}
-        {<DiretteTableSkeleton />}
+         {isActiveSpinner && <DiretteTableSkeleton />}
         <div className="dirette-table-content">
           <Accordion
             type="multiple"
