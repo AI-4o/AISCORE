@@ -28,8 +28,8 @@ export default function DialogProvider() {
             {isSpinner ? 
                 <Spinner isActive={isOpen} />
                 :
-                <Dialog open={isOpen} onOpenChange={close}>
-                    <DialogContent>
+                <Dialog open={isOpen} onOpenChange={close} >
+                    <DialogContent className="min-w-[90vw] min-h-[90vh]">
                         <DialogHeader>
                             <DialogTitle>{content?.header}</DialogTitle>
                         </DialogHeader>

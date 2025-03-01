@@ -11,7 +11,6 @@ import DirettaRow from "../diretta-row/diretta-row";
 import { useAppSelector, useAppDispatch } from "store/hooks";
 import {
   fetchFixtures,
-  sFavoriteLeaguesFixtures,
   sFavoriteLeaguesFixturesByDay,
   sLeagueFixturesByDay,
   toggleFavoriteLeague,
@@ -21,11 +20,10 @@ import { toggleDialog } from "@/app/store/features/dialog/dialogSlice";
 import { config } from "appConfig";
 import Image from "next/image";
 import DiretteToolbar from "../dirette-toolbar/dirette-toolbar";
-import { getAPIFootballParams } from "api/api-football/api-call.defs";
 import PreferitiIcon from "components/custom/preferiti-icon/preferiti-icon";
 import { DiretteTableSkeleton } from "../dirette-table-skeleton/skeleton";
 
-export function DiretteTable(p: getAPIFootballParams) {
+export function DiretteTable() {
   const dispatch = useAppDispatch();
 
   // day to show in the table, set by the toolbar select
@@ -47,13 +45,12 @@ export function DiretteTable(p: getAPIFootballParams) {
 
   // get the leagueFixtures of the day, filtered also by favorite if showFavorites is true
   const leagueFixturesOfDay = useAppSelector((s) => {
-    const lfs = sLeagueFixturesByDay(s, dayToShow);
+    const lfs = sLeagueFixturesByDay(s, dayToShow).slice(0, 15);
     if (showFavorites) return sFavoriteLeaguesFixturesByDay(s, dayToShow)  ;
     return lfs;
   });
   const isNotActiveSpinner = useAppSelector((state) => !state.spinner.isActive && state.spinner.isSpinner);
   const isActiveSpinner = useAppSelector((state) => state.spinner.isActive && state.spinner.isSpinner);
-  const leagueFixtures = useAppSelector((state) => state.football.leaguesFixtures);
 
   useEffect(() => {
     dispatch(toggleDialog({ isSpinner: true }));
@@ -66,9 +63,8 @@ export function DiretteTable(p: getAPIFootballParams) {
   // DEBUG
   useEffect(() => {
     (window as any).leagueFixturesOfDay = leagueFixturesOfDay;
-    (window as any).leagueFixtures = leagueFixtures;
 
-  }, [leagueFixturesOfDay, dayToShow, leagueFixtures]);
+  }, [leagueFixturesOfDay, dayToShow]);
 
   return (
     <div className="dirette-table w-full bg-secondary-football">
