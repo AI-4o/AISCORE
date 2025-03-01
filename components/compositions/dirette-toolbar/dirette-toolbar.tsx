@@ -1,10 +1,10 @@
 "use client";
 /**
  * DiretteToolbar Component
- * 
+ *
  * Toolbar component for the DirectteTable that provides filtering and date selection controls.
  * Allows users to filter matches by date and toggle between all matches and favorites.
- * 
+ *
  * Features:
  * - Date selection dropdown to choose which day's matches to display
  * - Favorites toggle button to filter matches by favorite status
@@ -28,9 +28,10 @@ interface DiretteToolbarConfig {
   onShowFavoritesChange: (showFavorites: boolean) => void;
 }
 
-export default function DiretteToolbar({ onDateChange, onShowFavoritesChange }: DiretteToolbarConfig) {
-
-  
+export default function DiretteToolbar({
+  onDateChange,
+  onShowFavoritesChange,
+}: DiretteToolbarConfig) {
   const selectDatesOptions = getDateRange(
     getLastWeekDate(),
     getNextWeekDate()
@@ -40,9 +41,7 @@ export default function DiretteToolbar({ onDateChange, onShowFavoritesChange }: 
     element: <div>{formatDateWithDayName(date)}</div>,
   }));
 
-  const todayDate = selectDatesOptions.find(
-    (o) => o.name === "OGGI",
-  );
+  const todayDate = selectDatesOptions.find((o) => o.name === "OGGI");
 
   const [showFavorites, setShowFavorites] = useState<boolean>(false);
 
@@ -54,8 +53,8 @@ export default function DiretteToolbar({ onDateChange, onShowFavoritesChange }: 
 
   return (
     <div className="dirette-toolbar">
-      <div className="flex items-center gap-5">
-        <div>Dirette</div>
+      <div className="flex items-center justify-center md:gap-5">
+        <div className="hidden md:block">Dirette</div>
         <div className="flex items-center justify-center">
           <InputSelect
             value={todayDate?.value}
@@ -64,7 +63,7 @@ export default function DiretteToolbar({ onDateChange, onShowFavoritesChange }: 
             onChange={onDateChange}
             hasIncrementBtns={true}
           />
-          <div className="ml-4">
+          <div className="hidden md:block ml-4">
             <Button
               onClick={toggleShowFavorites}
               variant="outline"

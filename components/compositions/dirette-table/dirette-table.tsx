@@ -81,12 +81,13 @@ export function DiretteTable() {
   }, [leagueFixturesOfDay, dayToShow]);
 
   return (
-    <div className="dirette-table w-full bg-secondary-football">
+    <div className="w-full bg-secondary-football">
         <DiretteToolbar
           onDateChange={(e) => setDayToShow(new Date(e.target.value))}
           onShowFavoritesChange={(e) => setShowFavorites(e)}
         />
-        {isActiveSpinner && <DiretteTableSkeleton />}
+        {/* {isActiveSpinner && <DiretteTableSkeleton />} */}
+        {<DiretteTableSkeleton />}
         <div className="dirette-table-content">
           <Accordion
             type="multiple"

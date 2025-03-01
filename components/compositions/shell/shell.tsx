@@ -1,9 +1,9 @@
 /**
  * Shell Component
- * 
+ *
  * Main layout component that structures the overall application interface.
  * Provides a consistent layout structure for all pages with configurable content areas.
- * 
+ *
  * Features:
  * - Consistent navigation bar at the top
  * - Optional banner area below navigation
@@ -34,8 +34,6 @@ export function Shell({
   rightSideChild,
   footer,
 }: ShellProps) {
-  
-  
   return (
     <div className="page-wrapper">
       <div
@@ -46,7 +44,7 @@ export function Shell({
         <Navbar items={navbarItems} />
       </div>
       <div className="banner-wrapper">{banner}</div>
-      <div className="main-wrapper flex">
+      <div className="main-wrapper flex justify-center items-center">
         {leftSideChild}
         <div className="main-content flex justify-center items-start min-h-screen">
           {mainChild}
