@@ -1,5 +1,20 @@
 "use client";
 
+/**
+ * Navbar Component
+ * 
+ * Main navigation component for the application that displays the primary navigation links.
+ * Supports both desktop and mobile views with responsive behavior.
+ * 
+ * Features:
+ * - Responsive design with mobile hamburger menu
+ * - Animated mobile menu dropdown
+ * - Configurable navigation items through props
+ * - Styled consistent with the application theme
+ * - Links to main sections of the application (home, leagues, predictions, etc.)
+ * - Accessibility-friendly navigation
+ */
+
 import * as React from "react";
 import Link from "next/link";
 import { cn } from "utils";

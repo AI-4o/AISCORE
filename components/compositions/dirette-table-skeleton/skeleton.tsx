@@ -1,3 +1,16 @@
+/**
+ * DiretteTableSkeleton Component
+ * 
+ * Loading skeleton placeholder for the DiretteTable component.
+ * Displays a visual representation of the table structure while data is being fetched.
+ * 
+ * Features:
+ * - Mimics the exact structure of the DiretteTable component
+ * - Shows animated pulse effects to indicate loading state
+ * - Includes skeleton representations of toolbar, league headers, and match rows
+ * - Maintains the same layout and spacing as the actual table
+ * - Improves perceived performance during data loading
+ */
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "components/ui/accordion";
 
 export const DiretteTableSkeleton = () => {

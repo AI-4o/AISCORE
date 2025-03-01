@@ -1,3 +1,17 @@
+/**
+ * Shell Component
+ * 
+ * Main layout component that structures the overall application interface.
+ * Provides a consistent layout structure for all pages with configurable content areas.
+ * 
+ * Features:
+ * - Consistent navigation bar at the top
+ * - Optional banner area below navigation
+ * - Flexible main content area with optional sidebars
+ * - Background image support with overlay effects
+ * - Optional footer area
+ * - Responsive layout that adapts to different screen sizes
+ */
 import { Navbar, NavbarItemProps } from "../navbar/navbar";
 import "./style.css";
 

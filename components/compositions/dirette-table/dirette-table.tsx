@@ -1,5 +1,19 @@
 "use client";
-
+/**
+ * DiretteTable Component
+ * 
+ * Primary component for displaying football matches grouped by league.
+ * Organizes and presents fixtures in a tabular format with collapsible league headers.
+ * 
+ * Features:
+ * - Displays matches organized by leagues in accordion sections
+ * - Supports filtering to show only favorite matches
+ * - Handles date selection for showing matches on specific days
+ * - Manages league favorites toggling
+ * - Uses DirettaRow as child component for each match
+ * - Displays loading skeleton during data fetching
+ * - Fully responsive design
+ */
 import {
   Accordion,
   AccordionContent,

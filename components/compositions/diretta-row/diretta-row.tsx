@@ -1,4 +1,17 @@
 "use client";
+/**
+ * DirettaRow Component
+ * 
+ * Displays a single football match row within the DiretteTable component.
+ * Shows team information, scores, match time, and status.
+ * 
+ * Features:
+ * - Toggleable favorite status for matches
+ * - Click interaction to open detailed match view
+ * - Displays match time and status
+ * - Shows team logos and names
+ * - Integrates with Redux store for state management
+ */
 import { FavoriteFixture } from "@/app/api/api-football/models/footballModels";
 import "./diretta-row.css";
 import { config } from "appConfig";
@@ -29,51 +42,67 @@ export default function DirettaRow(fixture: FavoriteFixture) {
       {
         name: "Statistiche",
         id: "statistics",
-        body: <Statistics statisticsA={getExampleStatistics()} statisticsB={getExampleStatistics()} />   
+        body: (
+          <Statistics
+            statisticsA={getExampleStatistics()}
+            statisticsB={getExampleStatistics()}
+          />
+        ),
       },
       {
         name: "Formazioni",
         id: "formations",
-        body: <div>inserire componente di formazioni</div>
+        body: <div>inserire componente di formazioni</div>,
       },
       {
         name: "Commento",
         id: "comment",
-        body: <div>inserire componente di commento</div>
+        body: <div>inserire componente di commento</div>,
       },
       {
         name: "Pronostici",
         id: "predictions",
-        body: <div>inserire componente di pronostici</div>
+        body: <div>inserire componente di pronostici</div>,
       },
       {
         name: "Riassunto",
         id: "summary",
-        body: <div>inserire componente di riassunto</div>
-      }
-    ]
-    dispatch(toggleDialog({
-      content: {
-        body: <MultiView views={views} commonBanner={<Banner fixture={fixture} />} />
-      }
-    }))
-  }
+        body: <div>inserire componente di riassunto</div>,
+      },
+    ];
+    dispatch(
+      toggleDialog({
+        content: {
+          body: (
+            <MultiView
+              views={views}
+              commonBanner={<Banner fixture={fixture} />}
+            />
+          ),
+        },
+      })
+    );
+  };
 
   return (
-    <div
-      className="flex w-full"
-    >
+    <div className="flex w-full">
       <PreferitiIcon
         onSelected={onClickStarBtn}
         selected={fixture.isFavorite}
       />
-      <div className="diretta-row grid items-center"
-      style={{ gridTemplateColumns: "15% 35% 10% 30% 10% 0%" }}
-      onClick={onClickRow}
+      <div
+        className="diretta-row grid items-center"
+        style={{ gridTemplateColumns: "15% 35% 10% 30% 10% 0%" }}
+        onClick={onClickRow}
       >
-
         <div className="text-center">
-          <b>{formatDateToHHmm(new Date(new Date(fixture0.date).getTime() + 60 * 60 * 1000).toISOString())}</b>
+          <b>
+            {formatDateToHHmm(
+              new Date(
+                new Date(fixture0.date).getTime() + 60 * 60 * 1000
+              ).toISOString()
+            )}
+          </b>
         </div>
         <div className="flex items-center gap-3 whitespace-nowrap overflow-hidden">
           <Image
@@ -111,4 +140,3 @@ export default function DirettaRow(fixture: FavoriteFixture) {
     </div>
   );
 }
-

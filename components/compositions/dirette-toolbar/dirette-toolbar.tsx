@@ -1,4 +1,17 @@
 "use client";
+/**
+ * DiretteToolbar Component
+ * 
+ * Toolbar component for the DirectteTable that provides filtering and date selection controls.
+ * Allows users to filter matches by date and toggle between all matches and favorites.
+ * 
+ * Features:
+ * - Date selection dropdown to choose which day's matches to display
+ * - Favorites toggle button to filter matches by favorite status
+ * - Responsive design that works on all device sizes
+ * - Provides callbacks for parent components to handle state changes
+ * - Pre-selects current day by default
+ */
 import InputSelect from "components/custom/inputs/input-select";
 import "./style.css";
 import {
