@@ -1,5 +1,18 @@
 "use client";
 
+/**
+ * Spinner Component
+ * 
+ * A loading indicator component that displays an animated spinner.
+ * Used to indicate background processes or loading states.
+ * 
+ * Features:
+ * - Animated loading indicator using Lottie animation
+ * - Visibility control through props
+ * - Auto-unmounts after a delay to improve performance
+ * - Styled overlay that prevents interaction with background content
+ * - Configurable animation source from app config
+ */
 import React, { useState } from "react";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import "./style.css";

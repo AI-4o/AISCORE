@@ -1,3 +1,16 @@
+/**
+ * SideMenu Component
+ * 
+ * A vertical navigation menu component that displays a list of links with icons.
+ * Used for secondary navigation in sidebar layouts.
+ * 
+ * Features:
+ * - Displays links with associated icons
+ * - Vertical layout with consistent styling
+ * - Supports Next.js Link component for client-side navigation
+ * - Customizable through props
+ * - Responsive design that works with the application layout
+ */
 import React from "react";
 import "./style.css";
 import Link from "next/link";

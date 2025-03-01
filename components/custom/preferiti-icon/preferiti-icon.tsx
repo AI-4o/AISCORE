@@ -1,4 +1,17 @@
 "use client";
+/**
+ * PreferitiButton Component
+ * 
+ * A toggleable star button component used to mark items as favorites.
+ * Displays a filled or outlined star icon based on the selected state.
+ * 
+ * Features:
+ * - Toggle between selected/unselected states
+ * - Hover effects for better user interaction
+ * - Callback support for parent components
+ * - Controlled or uncontrolled usage
+ * - Maintains internal state while syncing with external state
+ */
 import { StarIcon } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import "./style.css";

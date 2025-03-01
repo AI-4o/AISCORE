@@ -1,3 +1,17 @@
+/**
+ * InputText Component
+ * 
+ * A styled text input component for collecting single-line text input.
+ * Provides consistent styling and behavior for text fields.
+ * 
+ * Features:
+ * - Styled text input with consistent appearance
+ * - Optional label and error display
+ * - Form state integration
+ * - Controlled or uncontrolled usage
+ * - Supports disabled state
+ * - Displays validation errors from form state
+ */
 import { InputInterface } from "./input-interface";
 
 export default function InputText({

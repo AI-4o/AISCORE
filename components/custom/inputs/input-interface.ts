@@ -1,3 +1,17 @@
+/**
+ * InputInterface
+ * 
+ * Common interface shared by all input components in the application.
+ * Provides consistent props structure for form inputs.
+ * 
+ * Properties:
+ * - label: Optional text label for the input
+ * - name: Optional input name for form submission
+ * - state: Optional state object for form libraries
+ * - value: Optional current value of the input
+ * - disabled: Optional flag to disable the input
+ * - onChange: Optional callback for value changes
+ */
 export interface InputInterface {
     label?: string;
     name?: string;

@@ -1,4 +1,18 @@
 "use client";
+/**
+ * InputSelect Component
+ * 
+ * A custom dropdown select component with enhanced styling and functionality.
+ * Provides a dropdown menu of options with support for custom rendering.
+ * 
+ * Features:
+ * - Custom styled dropdown with support for both text and element options
+ * - Click-outside detection to close the dropdown
+ * - Optional increment/decrement buttons for navigating options
+ * - Controlled or uncontrolled usage
+ * - Maintains selected option state
+ * - Supports keyboard navigation
+ */
 import { useState, useRef, useEffect } from "react";
 import { InputInterface } from "./input-interface";
 import "./inputs-style.css";

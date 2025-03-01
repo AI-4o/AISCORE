@@ -1,4 +1,16 @@
-
+/**
+ * StatisticRow Component
+ * 
+ * Displays a single statistic comparison between two values with a visual bar representation.
+ * Used within the Statistics component to show individual metrics.
+ * 
+ * Features:
+ * - Calculates and displays relative percentages between two values
+ * - Renders a visual progress bar showing the proportion between values
+ * - Handles edge cases (e.g., when both values are zero)
+ * - Displays the statistic type label
+ * - Shows the actual values on either side of the bar
+ */
 export type Statistic = {
     value1: number | string;
     value2: number | string;

@@ -1,4 +1,17 @@
 'use client';
+/**
+ * DialogProvider Component
+ * 
+ * A global dialog/modal provider that handles displaying dialogs and loading spinners.
+ * Connects to the Redux store to manage dialog state across the application.
+ * 
+ * Features:
+ * - Displays modal dialogs with customizable content
+ * - Shows loading spinners during async operations
+ * - Supports auto-closing dialogs after a timeout
+ * - Manages dialog state through Redux
+ * - Provides consistent dialog styling across the application
+ */
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "components/ui/dialog";
 import { Button } from "components/ui/button";
 import { useAppSelector, useAppDispatch } from "store/hooks";

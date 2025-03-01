@@ -1,3 +1,17 @@
+/**
+ * InputEmail Component
+ * 
+ * A specialized input component for collecting email addresses.
+ * Uses the email input type for built-in validation.
+ * 
+ * Features:
+ * - Email-specific input with browser validation
+ * - Consistent styling with other form inputs
+ * - Optional label and error display
+ * - Form state integration
+ * - Controlled or uncontrolled usage
+ * - Displays validation errors from form state
+ */
 import { InputInterface } from "./input-interface";
 
 export default function InputEmail({

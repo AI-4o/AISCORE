@@ -1,5 +1,18 @@
 'use client';
 
+/**
+ * Statistics Component
+ * 
+ * Displays a comparison of statistics between two entities (typically teams in a match).
+ * Renders a scrollable list of statistic rows, each showing a comparison metric.
+ * 
+ * Features:
+ * - Compares two sets of statistics side by side
+ * - Scrollable container for many statistics
+ * - Uses StatisticRow components to visualize each comparison
+ * - Handles different types of statistics (numeric, percentage, etc.)
+ * - Responsive design with hidden scrollbar
+ */
 import StatisticRow from "./statistic-row/statistic-row";
 import './style.css';
 

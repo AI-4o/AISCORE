@@ -1,5 +1,17 @@
 "use client";
 
+/**
+ * ModeToggle Component
+ * 
+ * A dropdown button component that allows users to switch between light, dark, and system themes.
+ * Displays sun/moon icons that animate during theme transitions.
+ * 
+ * Features:
+ * - Dropdown menu with theme options (Light, Dark, System)
+ * - Animated icon transitions between sun and moon
+ * - Integrates with next-themes for theme management
+ * - Accessible design with screen reader support
+ */
 import * as React from "react";
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
