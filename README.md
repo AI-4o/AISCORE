@@ -26,6 +26,7 @@ Partendo dalla modale dettaglio partita:
 - [ ] riassunto
 - [ ] commento
 
+---
 
 ## Backlog
 - [ ] tabella dirette
