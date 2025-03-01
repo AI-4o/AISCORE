@@ -27,8 +27,8 @@ export async function GET(request: NextRequest) {
             const res = await ofetch<PlayerResponse>(playerInfoUrl);
             
             // Salva il player nella cache
-            if (res.response && res.response.length > 0 && res.response.player) {
-                await savePlayer(res.response.player);
+            if (res.response && res.response.length > 0 && res.response[0].player) {
+                await savePlayer(res.response[0].player);
             }
             
             return res;

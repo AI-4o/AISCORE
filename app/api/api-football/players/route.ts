@@ -15,7 +15,7 @@ export async function GET(request: NextRequest) {
     const url = `https://v3.football.api-sports.io/players/squads?team=${teamId}`;
     const responseJson = await ofetch(url);
 
-    await writeJSON(responseJson, "app/api/api-football/players/resp.json");
+    //await writeJSON(responseJson, "app/api/api-football/players/resp.json");
     return NextResponse.json({ players: responseJson }, { status: 200 });
   } catch (error) {
     console.error("Errore nel recupero dei giocatori:", error);

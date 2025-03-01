@@ -38,7 +38,7 @@ export async function GET(request: NextRequest) {
         // console.log("Player data retrieved:", combinedData);
 
     // Salva la risposta in un file JSON per analisi con fx
-    await writeJSON(combinedData, "app/api/api-football/player/resp.json");
+    //await writeJSON(combinedData, "app/api/api-football/player/resp.json");
 
     return NextResponse.json(combinedData, { status: 200 });
     } catch (error) {

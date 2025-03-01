@@ -17,7 +17,7 @@ export async function GET(r: NextRequest) {
       return BASE_URL + `date=${formattedDate}`;
     });
     const fixtures = await ofetch<FixtureResponse>(...urls);
-    await writeJSON(fixtures, "app/api/api-football/get-fixtures/resp.json");
+    // await writeJSON(fixtures, "app/api/api-football/get-fixtures/resp.json");
     return NextResponse.json(fixtures, { status: 200 });
   } catch (error) {
     console.error("Errore nella route get-api:", error);
