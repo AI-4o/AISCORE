@@ -19,7 +19,9 @@ interface PlayerPageProps {
 export default function PlayerPage({ params }: PlayerPageProps) {
   const dispatch = useAppDispatch();
   const playerId = parseInt(params.id, 10);
-  
+
+  return <div>Player Page</div>;
+  /*
   const playerInfo = useAppSelector((state) => state.player.playerInfo);
   const playerStats = useAppSelector((state) => state.player.playerStats);
   const playerTransfers = useAppSelector((state) => state.player.playerTransfers);
@@ -73,5 +75,5 @@ export default function PlayerPage({ params }: PlayerPageProps) {
         </TabsContent>
       </Tabs>
     </div>
-  );
+  );*/
 } 

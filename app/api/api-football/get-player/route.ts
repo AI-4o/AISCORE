@@ -1,3 +1,5 @@
+
+
 import { NextRequest, NextResponse } from 'next/server';
 import { PlayerResponse, PlayerStatisticsResponse, PlayerTransferResponse } from '../models/footballModels';
 import { ofetch } from '../utils';
@@ -15,8 +17,12 @@ export async function GET(request: NextRequest) {
         const params = Object.fromEntries(request.nextUrl.searchParams);
         const playerId = parseInt(params.id);
         const season = params.season ? parseInt(params.season) : new Date().getFullYear();
-        
-
+    } catch (error) {
+        console.error('Error in get-player route:', error);
+        return NextResponse.json({ error: 'Server error' }, { status: 500 });
+    }
+}
+/*
         // URLs for different endpoints
         const playerInfoUrl = `https://v3.football.api-sports.io/players?id=${playerId}`;
         const playerStatsUrl = `https://v3.football.api-sports.io/players/statistics?season=${season}&player=${playerId}`;
@@ -80,4 +86,4 @@ export async function GET(request: NextRequest) {
         console.error('Error in get-player route:', error);
         return NextResponse.json({ error: 'Server error' }, { status: 500 });
     }
-} 
+} */

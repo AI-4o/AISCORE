@@ -9,7 +9,7 @@ export type SingleStatistic = {
 }
 export default function Statistics({statisticsA, statisticsB}: {statisticsA: SingleStatistic[], statisticsB: SingleStatistic[]}) {
 
-    const statistics = [];
+    const statistics = [] as { value1: string | number; value2: string | number; type: string }[];
     for(let i = 0; i < Math.min(statisticsA.length, statisticsB.length); i++) {
         statistics.push({
             value1: statisticsA[i].value,

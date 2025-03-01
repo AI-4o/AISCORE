@@ -265,7 +265,7 @@ export interface PlayerStatisticsResponse {
     current: number;
     total: number;
   };
-  response: Array<PlayerStatistics>;
+  response: PlayerStatistics;
 }
 
 export interface PlayerTransferResponse {
