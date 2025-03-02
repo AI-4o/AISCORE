@@ -2,7 +2,7 @@
 
 Pronostici calcio, dirette live, statistiche partite e calciatori, forum per confronto su partite.
 
-## TODO
+## TODO SPRINT
 
 ### TASK GIORGIO
 - [x] skeleton table
