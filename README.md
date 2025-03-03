@@ -6,7 +6,7 @@ Pronostici calcio, dirette live, statistiche partite e calciatori, forum per con
 
 ### TASK GIORGIO
 - [x] skeleton table
-- [ ] responsiveness table
+- [ ] layout table  => fare in modo che la stella a sx degli accordion compaia dentro la parte chiara (sul modello di diretta.it). La parte Chiuara deve occupare l'intera riga (vedere diretta.it)
 - [x] responsiveness navbar
 - [ ] modale dettaglio partita
       - [ ] banner
